@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Y+dDwqv9K8UHbPnLBlREL/jlkawOiVd1F/UWerA/h9MZ8wOMqCxlD2KuGY111F+N/E5IKcBcvYHN4L1zDGcEYA==",
+  "success": true,
+  "projectFilePath": "/Users/joshua/Downloads/MushroomPocket/MushroomPocket.csproj",
+  "expectedPackageFiles": [
+    "/Users/joshua/.nuget/packages/microsoft.netcore.app.ref/7.0.18/microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
+    "/Users/joshua/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.18/microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
+    "/Users/joshua/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.18/microsoft.netcore.app.host.osx-arm64.7.0.18.nupkg.sha512"
+  ],
+  "logs": []
+}

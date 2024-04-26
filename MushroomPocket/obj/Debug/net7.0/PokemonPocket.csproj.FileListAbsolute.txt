@@ -1,0 +1,15 @@
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\bin\Debug\net7.0\PokemonPocket.exe
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\bin\Debug\net7.0\PokemonPocket.deps.json
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\bin\Debug\net7.0\PokemonPocket.runtimeconfig.json
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\bin\Debug\net7.0\PokemonPocket.dll
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\bin\Debug\net7.0\PokemonPocket.pdb
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.csproj.AssemblyReference.cache
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.AssemblyInfoInputs.cache
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.AssemblyInfo.cs
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.csproj.CoreCompileInputs.cache
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.dll
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\refint\PokemonPocket.dll
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.pdb
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\PokemonPocket.genruntimeconfig.cache
+C:\Users\Novita\Documents\SharedFolder\IT2154\Assessments\Assignment1\Student Copy\PokemonPocket\obj\Debug\net7.0\ref\PokemonPocket.dll
