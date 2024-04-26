@@ -120,6 +120,16 @@ namespace MushroomPocket {
                 return;
             }
 
+            for (int i = 0; i < characters.Count - 1; i++) {
+                for (int j = 0; j < characters.Count - 1 - i; j++) {
+                    if (characters[j].HP < characters[j + 1].HP) {
+                        Character placeholder = characters[j];
+                        characters[j] =  characters[j + 1];
+                        characters[j + 1] = placeholder;
+                    }
+                }
+            }
+
             foreach (var character in characters) {
                 Console.WriteLine("-----------------------------");
                 Console.WriteLine($"Name: {character.Name}");
