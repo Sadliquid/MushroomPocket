@@ -124,7 +124,7 @@ namespace MushroomPocket {
                 Console.WriteLine("-----------------------------");
                 Console.WriteLine($"Name: {character.Name}");
                 Console.WriteLine($"HP: {character.HP}");
-                Console.Write($"EXP: {character.EXP}");
+                Console.WriteLine($"EXP: {character.EXP}");
                 Console.WriteLine($"Skill: {character.Skill}");
                 Console.WriteLine("-----------------------------");
             }
@@ -147,7 +147,7 @@ namespace MushroomPocket {
         public string Skill { get; set; } // getter + setter methods for "Skill"
     }
 
-    public class Waluigi : Character // subclass for Waluigi
+    public class Waluigi : Character // Waluigi's character subclass
     {
         public Waluigi()
         {
@@ -156,7 +156,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Daisy : Character // subclass for Daisy
+    public class Daisy : Character // Daisy's character subclass
     {
         public Daisy()
         {
@@ -165,7 +165,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Wario : Character // subclass for Wario
+    public class Wario : Character // Wario's character subclass
     {
         public Wario()
         {
