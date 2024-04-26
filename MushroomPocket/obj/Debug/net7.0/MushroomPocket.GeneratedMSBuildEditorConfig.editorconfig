@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MushroomPocket
-build_property.ProjectDir = /Users/joshua/Downloads/MushroomPocket/
+build_property.ProjectDir = /Users/joshua/Desktop/MushroomPocket/MushroomPocket/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

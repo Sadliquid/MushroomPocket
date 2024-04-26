@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/joshua/Downloads/MushroomPocket/MushroomPocket.csproj": {}
+    "/Users/joshua/Desktop/MushroomPocket/MushroomPocket/MushroomPocket.csproj": {}
   },
   "projects": {
-    "/Users/joshua/Downloads/MushroomPocket/MushroomPocket.csproj": {
+    "/Users/joshua/Desktop/MushroomPocket/MushroomPocket/MushroomPocket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/joshua/Downloads/MushroomPocket/MushroomPocket.csproj",
+        "projectUniqueName": "/Users/joshua/Desktop/MushroomPocket/MushroomPocket/MushroomPocket.csproj",
         "projectName": "MushroomPocket",
-        "projectPath": "/Users/joshua/Downloads/MushroomPocket/MushroomPocket.csproj",
+        "projectPath": "/Users/joshua/Desktop/MushroomPocket/MushroomPocket/MushroomPocket.csproj",
         "packagesPath": "/Users/joshua/.nuget/packages/",
-        "outputPath": "/Users/joshua/Downloads/MushroomPocket/obj/",
+        "outputPath": "/Users/joshua/Desktop/MushroomPocket/MushroomPocket/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/joshua/.nuget/NuGet/NuGet.Config"
