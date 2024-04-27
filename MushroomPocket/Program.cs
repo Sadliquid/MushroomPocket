@@ -25,7 +25,8 @@ namespace MushroomPocket {
                 Console.WriteLine("(2). List character(s) in my Pocket");
                 Console.WriteLine("(3). Check if I can transform my characters");
                 Console.WriteLine("(4). Transform characters(s) ");
-                Console.Write("Please only enter [1, 2, 3, 4] or Q to quit: ");
+                Console.WriteLine("(5). Remove a character from my pocket");
+                Console.Write("Please only enter [1, 2, 3, 4, 5] or Q to quit: ");
                 string choice = Console.ReadLine().ToUpper(); // so upper and lowercase is accepted
 
                 if (choice == "1") {
@@ -39,6 +40,9 @@ namespace MushroomPocket {
                 }
                 else if (choice == "4") {
                     TransformCharacters(mushroomMasters);
+                }
+                else if (choice == "5") {
+                    RemoveCharacter();
                 }
                 else if (choice == "Q") {
                     Console.WriteLine("");
@@ -294,6 +298,46 @@ namespace MushroomPocket {
 
             if (noEligibleTransformations == true) {
                 Console.WriteLine("Not enough characters to transform!");
+            }
+        }
+
+        static void RemoveCharacter(){
+            if (characters.Count == 0) {
+                Console.WriteLine("No characters in your pocket.");
+                return;
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("Characters in your pocket:");
+            Console.WriteLine("-----------------------------");
+            for (int i = 0; i < characters.Count; i++) {
+                Console.WriteLine($"({i + 1}). {characters[i].Name}");
+                Console.WriteLine($"HP: {characters[i].HP}");
+                Console.WriteLine($"EXP: {characters[i].EXP}");
+                Console.WriteLine($"Skill: {characters[i].Skill}");
+                Console.WriteLine("");
+            }
+            Console.WriteLine("-----------------------------");
+            Console.Write("Enter the  number of the character you want to remove: ");
+
+            string characterToDelete = Console.ReadLine();
+
+            try {
+                int convertednumber = int.Parse(characterToDelete);
+                if (convertednumber > characters.Count()) {
+                    Console.WriteLine("The chosen character does not exist in your pocket.");
+                    return;
+                }
+
+                string characterName = characters[int.Parse(characterToDelete) - 1].Name;
+
+                characters.RemoveAt(int.Parse(characterToDelete) - 1);
+                Console.WriteLine("");
+                Console.WriteLine(characterName + "  has been removed from your pocket.");
+            }
+
+            catch {
+                Console.WriteLine("Please enter a valid integer");
             }
         }
     }
