@@ -122,10 +122,10 @@ namespace MushroomPocket {
 
             for (int i = 0; i < characters.Count - 1; i++) {
                 for (int j = 0; j < characters.Count - 1 - i; j++) {
-                    if (characters[j].HP < characters[j + 1].HP) {
-                        Character placeholder = characters[j];
-                        characters[j] =  characters[j + 1];
-                        characters[j + 1] = placeholder;
+                    if (characters[j].HP < characters[j + 1].HP) { // if previous character HP < next character HP
+                        Character placeholder = characters[j]; // create variable to store HP of previous character
+                        characters[j] =  characters[j + 1]; // swap positions
+                        characters[j + 1] = placeholder; // assign placeholder HP to next character (after sorting)
                     }
                 }
             }
@@ -157,8 +157,7 @@ namespace MushroomPocket {
         public string Skill { get; set; } // getter + setter methods for "Skill"
     }
 
-    public class Waluigi : Character // Waluigi's character subclass
-    {
+    public class Waluigi : Character { // Waluigi's character subclass
         public Waluigi()
         {
             Name = "Waluigi";
@@ -166,8 +165,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Daisy : Character // Daisy's character subclass
-    {
+    public class Daisy : Character { // Daisy's character subclass
         public Daisy()
         {
             Name = "Daisy";
@@ -175,12 +173,35 @@ namespace MushroomPocket {
         }
     }
 
-    public class Wario : Character // Wario's character subclass
-    {
+    public class Wario : Character { // Wario's character subclass
         public Wario()
         {
             Name = "Wario";
             Skill = "Strength";
+        }
+    }
+
+    public class Peach : Character { // Peach's character subclass
+        public Peach()
+        {
+            Name = "Peach";
+            Skill = "Magic Abilities";
+        }
+    }
+
+    public class Mario : Character { // Mario's character subclass
+        public Mario()
+        {
+            Name = "Mario";
+            Skill = "Combat Skills";
+        }
+    }
+
+    public class Luigi : Character { // Luigi's character subclass
+        public Luigi()
+        {
+            Name = "Luigi";
+            Skill = "Precision and Accuracy";
         }
     }
 }

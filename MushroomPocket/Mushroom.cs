@@ -13,14 +13,4 @@ namespace MushroomPocket{
             this.TransformTo = transformTo;
         }
     }
-  
-  
-
-
-
-
-
-
-
-  
 }
