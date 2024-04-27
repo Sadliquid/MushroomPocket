@@ -301,7 +301,7 @@ namespace MushroomPocket {
             }
         }
 
-        static void RemoveCharacter(){
+        static void RemoveCharacter(){ // Additional simple useful feature
             if (characters.Count == 0) {
                 Console.WriteLine("No characters in your pocket.");
                 return;
@@ -342,8 +342,7 @@ namespace MushroomPocket {
         }
     }
 
-    public abstract class Character // abstract class, avoid direct instances of itself
-    {
+    public abstract class Character { // abstract class, avoid direct instances of itself
         public string Name { get; set; } // getter + setter methods for "Name"
         public int HP { get; set; } // getter + setter methods for "HP"
         public int EXP { get; set; } // getter + setter methods for "EXP"
