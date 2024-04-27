@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 namespace MushroomPocket {
     class Program {
         static List<Character> characters = new List<Character>(); // list for storing characters
+        static bool noCharactersToTransform = true;
         static void Main(string[] args) {   
             List<MushroomMaster> mushroomMasters = new List<MushroomMaster>(){
                 new MushroomMaster("Daisy", 2, "Peach"),
@@ -33,7 +34,7 @@ namespace MushroomPocket {
                     ListCharacters();
                 }
                 else if (choice == "3") {
-                    CheckTransform();
+                    CheckTransform(mushroomMasters);
                 }
                 else if (choice == "4") {
                     TransformCharacters(mushroomMasters);
@@ -140,7 +141,7 @@ namespace MushroomPocket {
             }
         }
 
-        static void CheckTransform() {
+        static void CheckTransform(List<MushroomMaster> mushroomMasters) {
             List<string> eligibleTransformations = new List<string>();
             if (characters.Count == 0) {
                 Console.WriteLine("");
@@ -148,39 +149,48 @@ namespace MushroomPocket {
                 return;
             }
 
-            int waluigiCount = characters.Count(c => c.Name == "Waluigi");
-            int daisyCount = characters.Count(c => c.Name == "Daisy");
-            int warioCount = characters.Count(c => c.Name == "Wario");
-
+            int index = 0;
             Console.WriteLine("");
-
-            if (waluigiCount >= 1) {
-                int eligibleWaluigis = waluigiCount / 1;
-                for (int i = 0; i < eligibleWaluigis; i++) {
-                    Console.WriteLine("Waluigi --> Luigi");
-                }
-            }
-
-            if  (daisyCount >= 2) {
-                int eligibleDaisys = daisyCount / 2;
-                for (int i = 0; i < eligibleDaisys; i++) {
-                    Console.WriteLine("Daisy --> Peach");
-                }
-            }
-
-            if (warioCount >= 3) {
-                int eligibleWarios = warioCount / 3;
-                for (int i = 0; i < eligibleWarios; i++) {
-                    Console.WriteLine("Wario --> Mario");
-                }
-            }
-
-            if (waluigiCount == 0) {
-                if (daisyCount == 0) {
-                    if (warioCount == 0) {
-                        Console.WriteLine("No characters to transform.");
+            foreach (var master in mushroomMasters) {
+                if (index == 0) {
+                    int daisyCount = characters.Count(c => c.Name == master.Name);
+                    if  (daisyCount >= 2) {
+                        noCharactersToTransform = false;
+                        int eligibleDaisys = daisyCount / 2;
+                        for (int i = 0; i < eligibleDaisys; i++) {
+                            Console.WriteLine("Daisy --> Peach");
+                        }
                     }
+                    index += 1;
                 }
+
+                else if (index == 1) {
+                    int warioCount = characters.Count(c => c.Name == master.Name);
+                    if (warioCount >= 3) {
+                        noCharactersToTransform = false;
+                        int eligibleWarios = warioCount / 3;
+                        for (int i = 0; i < eligibleWarios; i++) {
+                            Console.WriteLine("Wario --> Mario");
+                        }
+                    }
+                    index += 1;
+                }
+                
+                else if (index == 2) {
+                    int waluigiCount = characters.Count(c => c.Name == master.Name);
+                    if (waluigiCount >= 1) {
+                        noCharactersToTransform = false;
+                        int eligibleWaluigis = waluigiCount / 1;
+                        for (int i = 0; i < eligibleWaluigis; i++) {
+                            Console.WriteLine("Waluigi --> Luigi");
+                        }
+                    }
+                    index += 1;
+                }
+            }
+
+            if (noCharactersToTransform == true) {
+                Console.WriteLine("No characters to transform.");
             }
         }
 
