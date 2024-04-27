@@ -11,6 +11,7 @@ The following are where I sourced for info and got help from throughout this who
 - [C# Class Types (C# Corner)](https://www.c-sharpcorner.com/UploadFile/0c1bb2/types-of-classes-in-C-Sharp1/)
 - [Getters + Setters in C# (W3 Schools)](https://www.w3schools.com/cs/cs_properties.php)
 - [Lists in C# (GeeksForGeeks)](https://www.geeksforgeeks.org/c-sharp-list-class/)
+- [Exceptions in C# (W3 Schools)](https://www.w3schools.com/cs/cs_exceptions.php)
 - [Google Gemini](https://gemini.google.com/app)
 
 
