@@ -211,6 +211,7 @@ namespace MushroomPocket {
         static void TransformCharacters(List<MushroomMaster> mushroomMasters) {
             noEligibleTransformations = true;
             if (characters.Count == 0) {
+                Console.WriteLine("");
                 Console.WriteLine("No characters in your pocket.");
                 return;
             }
@@ -313,7 +314,8 @@ namespace MushroomPocket {
 
         static void RemoveCharacter(){ // Additional simple useful feature
             if (characters.Count == 0) {
-                Console.WriteLine("No characters in your pocket.");
+                Console.WriteLine("");
+                Console.WriteLine("No characters in your pocket to remove!");
                 return;
             }
 
@@ -328,14 +330,14 @@ namespace MushroomPocket {
                 Console.WriteLine("");
             }
             Console.WriteLine("-----------------------------");
-            Console.Write("Enter the  number of the character you want to remove: ");
+            Console.Write("Enter the number of the character you want to remove: ");
 
             string characterToDelete = Console.ReadLine();
 
             try {
                 int convertedCharacterToDelete = int.Parse(characterToDelete);
                 if (convertedCharacterToDelete > characters.Count()) {
-                    Console.WriteLine("The chosen character does not exist in your pocket.");
+                    Console.WriteLine("No such character!");
                     return;
                 }
 
