@@ -8,6 +8,7 @@ namespace MushroomPocket {
     class Program {
         static List<Character> characters = new List<Character>(); // list for storing characters
         static bool noCharactersToTransform = true;
+        static bool noEligibleTransformations = true;
         static void Main(string[] args) {   
             List<MushroomMaster> mushroomMasters = new List<MushroomMaster>(){
                 new MushroomMaster("Daisy", 2, "Peach"),
@@ -151,12 +152,12 @@ namespace MushroomPocket {
 
             int index = 0;
             Console.WriteLine("");
-            foreach (var master in mushroomMasters) {
+            foreach (var master in mushroomMasters) { // loop thru the given mushroomMasters list
                 if (index == 0) {
-                    int daisyCount = characters.Count(c => c.Name == master.Name);
+                    int daisyCount = characters.Count(c => c.Name == master.Name); // count number of characters where name is "Daisy"
                     if  (daisyCount >= 2) {
                         noCharactersToTransform = false;
-                        int eligibleDaisys = daisyCount / master.NoToTransform;
+                        int eligibleDaisys = daisyCount / master.NoToTransform; // floor divide
                         for (int i = 0; i < eligibleDaisys; i++) {
                             Console.WriteLine(master.Name + " --> " + master.TransformTo);
                         }
@@ -165,10 +166,10 @@ namespace MushroomPocket {
                 }
 
                 else if (index == 1) {
-                    int warioCount = characters.Count(c => c.Name == master.Name);
+                    int warioCount = characters.Count(c => c.Name == master.Name); // count number of characters where name is "Wario"
                     if (warioCount >= 3) {
                         noCharactersToTransform = false;
-                        int eligibleWarios = warioCount / master.NoToTransform;
+                        int eligibleWarios = warioCount / master.NoToTransform; // floor divide
                         for (int i = 0; i < eligibleWarios; i++) {
                             Console.WriteLine(master.Name + " --> " + master.TransformTo);
                         }
@@ -177,10 +178,10 @@ namespace MushroomPocket {
                 }
                 
                 else if (index == 2) {
-                    int waluigiCount = characters.Count(c => c.Name == master.Name);
+                    int waluigiCount = characters.Count(c => c.Name == master.Name); // count number of characters where name is "Waluigi"
                     if (waluigiCount >= 1) {
                         noCharactersToTransform = false;
-                        int eligibleWaluigis = waluigiCount / master.NoToTransform;
+                        int eligibleWaluigis = waluigiCount / master.NoToTransform; // floor divide
                         for (int i = 0; i < eligibleWaluigis; i++) {
                             Console.WriteLine(master.Name + " --> " + master.TransformTo);
                         }
@@ -198,6 +199,101 @@ namespace MushroomPocket {
             if (characters.Count == 0) {
                 Console.WriteLine("No characters in your pocket.");
                 return;
+            }
+
+            int index = 0;
+            Console.WriteLine("");
+            foreach (var master in mushroomMasters) {
+                if (index == 0) {
+                    int daisyCount = characters.Count(c => c.Name == master.Name);
+                    if (daisyCount >= 2) {
+                        noEligibleTransformations = false;
+                        int eligibleDaisys = daisyCount / master.NoToTransform;
+                        int daisysToRemove = eligibleDaisys * master.NoToTransform;
+                        int daisysRemoved = 0;
+                        for (int i = characters.Count() - 1; i >= 0; i--) { // loop thru from the back to avoid conflict of indexes at the front
+                            if (characters[i].Name == master.Name) {
+                                characters.RemoveAt(i); // remove the character from characters list
+                                daisysRemoved += 1;
+                                if (daisysRemoved == daisysToRemove) {
+                                    break; // so we dont remove more than needed
+                                }
+                            }
+                        }
+
+                        for (int j = 0; j < eligibleDaisys; j++) {
+                            characters.Add(new Peach { // add transformed character
+                                HP = 100,
+                                EXP = 0
+                            });
+
+                            Console.WriteLine(master.Name + " has been transformed to " + master.TransformTo);
+                        }
+                    }
+                    index += 1;
+                }
+
+                else if (index == 1) {
+                    int warioCount = characters.Count(c => c.Name == master.Name);
+                    if (warioCount >= 3) {
+                        noEligibleTransformations = false;
+                        int eligibleWarios = warioCount / master.NoToTransform;
+                        int wariosToRemove = eligibleWarios * master.NoToTransform;
+                        int wariosRemoved = 0;
+                        for (int i = characters.Count() - 1; i >= 0; i--) {
+                            if (characters[i].Name == master.Name) {
+                                characters.RemoveAt(i);
+                                wariosRemoved += 1;
+                                if (wariosRemoved == wariosToRemove) {
+                                    break;
+                                }
+                            }
+                        }
+
+                        for (int j = 0; j < eligibleWarios; j++) {
+                            characters.Add(new Mario {
+                                HP = 100,
+                                EXP = 0
+                            });
+
+                            Console.WriteLine(master.Name + " has been transformed to " + master.TransformTo);
+                        }
+                    }
+                    index += 1;
+                }
+                
+                else if (index == 2) {
+                    int waluigiCount = characters.Count(c => c.Name == master.Name);
+                    if (waluigiCount >= 1) {
+                        noEligibleTransformations = false;
+                        int eligibleWaluigis = waluigiCount / master.NoToTransform;
+                        int waluigisToRemove = eligibleWaluigis * master.NoToTransform;
+                        int waluigisRemoved = 0;
+                        for (int i = characters.Count() - 1; i >= 0; i--) {
+                            if (characters[i].Name == master.Name) {
+                                characters.RemoveAt(i);
+                                waluigisRemoved += 1;
+                                if (waluigisRemoved == waluigisToRemove) {
+                                    break;
+                                }
+                            }
+                        }
+
+                        for (int j = 0; j < eligibleWaluigis; j++) {
+                            characters.Add(new Luigi {
+                                HP = 100,
+                                EXP = 0
+                            });
+
+                            Console.WriteLine(master.Name + " has been transformed to " + master.TransformTo);
+                        }
+                    }
+                    index += 1;
+                }
+            }
+
+            if (noEligibleTransformations == true) {
+                Console.WriteLine("Not enough characters to transform!");
             }
         }
     }
