@@ -156,9 +156,9 @@ namespace MushroomPocket {
                     int daisyCount = characters.Count(c => c.Name == master.Name);
                     if  (daisyCount >= 2) {
                         noCharactersToTransform = false;
-                        int eligibleDaisys = daisyCount / 2;
+                        int eligibleDaisys = daisyCount / master.NoToTransform;
                         for (int i = 0; i < eligibleDaisys; i++) {
-                            Console.WriteLine("Daisy --> Peach");
+                            Console.WriteLine(master.Name + " --> " + master.TransformTo);
                         }
                     }
                     index += 1;
@@ -168,9 +168,9 @@ namespace MushroomPocket {
                     int warioCount = characters.Count(c => c.Name == master.Name);
                     if (warioCount >= 3) {
                         noCharactersToTransform = false;
-                        int eligibleWarios = warioCount / 3;
+                        int eligibleWarios = warioCount / master.NoToTransform;
                         for (int i = 0; i < eligibleWarios; i++) {
-                            Console.WriteLine("Wario --> Mario");
+                            Console.WriteLine(master.Name + " --> " + master.TransformTo);
                         }
                     }
                     index += 1;
@@ -180,9 +180,9 @@ namespace MushroomPocket {
                     int waluigiCount = characters.Count(c => c.Name == master.Name);
                     if (waluigiCount >= 1) {
                         noCharactersToTransform = false;
-                        int eligibleWaluigis = waluigiCount / 1;
+                        int eligibleWaluigis = waluigiCount / master.NoToTransform;
                         for (int i = 0; i < eligibleWaluigis; i++) {
-                            Console.WriteLine("Waluigi --> Luigi");
+                            Console.WriteLine(master.Name + " --> " + master.TransformTo);
                         }
                     }
                     index += 1;
