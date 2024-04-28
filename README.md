@@ -1,6 +1,44 @@
 # MushroomPocket
 This is a C# school project that im working on, which covers OOP and Entity Framework
 
+This console application let Super Mario’s players keep, view the characters they played and check if they can transform to a higher role character to protect the Mushroom Kingdom. If the characters in the pocket are ready to transform, the player can transform their characters. Each time the player played a character, they can add the character details to their Mushroom Pocket.
+
+## How to use
+1.) Add a character to your pocket
+
+2.) List character(s) in your pocket
+
+3.) Check if you can transform your characters
+
+4.) Transform all your eligible characters
+
+5.) Remove a character from your pocket
+
+6.) Battle against the PC!
+
+## Notes
+- You can only add the 3 base characters (Daisy, Wario, and Waluigi) to your pocket, which can be transformed if you meet the requirements
+- You need 2 Daisy's to transform into Peach, 3 Warios to transform into Mario and only 1 Waluigi to transform into Luigi
+- You can use transformations in Battle Mode
+- You only have 2 dodges against the opposing character's attack
+- The character that remains with the most HP after all 3 battle rounds wins the battle!
+- If your character and the opposing character has the same HP after all 3 battle rounds, the battle will be a draw
+
+## Character moves
+Daisy (Leadership): 20 DMG
+
+Wario (Strength): 25 DMG
+
+Waluigi (Agility): 18 DMG
+
+Peach (Magic Abilities): 22 DMG
+
+Mario (Combat Skills): 30 DMG
+
+Luigi (Precision and Accuracy): 21 DMG
+
+*Mario has the most damage, being the main character in the game!*
+
 ## Sources and credits
 The following are where I sourced for info and got help from throughout this whole project, as well as owe credit to:
 - [Looping though an array (W3 Schools)](https://www.w3schools.com/cs/cs_arrays_loop.php)
