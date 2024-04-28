@@ -506,7 +506,7 @@ namespace MushroomPocket {
         {
             Name = "Waluigi";
             Skill = "Agility";
-            DMG = 21;
+            DMG = 18;
         }
     }
 
@@ -551,7 +551,7 @@ namespace MushroomPocket {
         {
             Name = "Luigi";
             Skill = "Precision and Accuracy";
-            DMG = 18;
+            DMG = 21;
         }
     }
 }
