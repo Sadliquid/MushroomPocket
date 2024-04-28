@@ -144,6 +144,7 @@ namespace MushroomPocket {
                 }
             }
 
+            Console.WriteLine("");
             foreach (var character in characters) {
                 Console.WriteLine("-----------------------------");
                 Console.WriteLine($"Name: {character.Name}");
@@ -360,13 +361,18 @@ namespace MushroomPocket {
                 Console.WriteLine("You don't have any character to battle with!");
                 return;
             }
-            Console.WriteLine("-------------BATTLE MODE-------------");
-            Console.WriteLine("-------------------------------------");
+            int characterStartingHP = 100;
+            int opposingStartingHP = 100;
+            Console.WriteLine("");
+            Console.WriteLine("--------------------------BATTLE MODE--------------------------");
+            Console.WriteLine("All characters' HP have been temporarily set to 100 for battle!");
+            Console.WriteLine("---------------------------------------------------------------");
+            Console.WriteLine("");
             for (int i = 0; i < characters.Count; i++) {
                 Console.WriteLine($"({i + 1}). {characters[i].Name}");
-                Console.WriteLine($"HP: {characters[i].HP}");
+                Console.WriteLine($"HP: {characterStartingHP}");
                 Console.WriteLine($"EXP: {characters[i].EXP}");
-                Console.WriteLine($"Skill: {characters[i].Skill}");
+                Console.WriteLine($"Skill: {characters[i].Skill} ({characters[i].DMG} DMG)");
                 Console.WriteLine("");
             }
             Console.WriteLine("-------------------------------------");
@@ -376,7 +382,6 @@ namespace MushroomPocket {
             if (int.TryParse(chosenCharacter, out int convertedChosenCharacter)) { // try converting to integer and assign it to convertedChosenCharacter
                 if ((convertedChosenCharacter <= characters.Count) && (convertedChosenCharacter > 0)) {
                     string characterName = characters[convertedChosenCharacter - 1].Name;
-                    int characterHP = characters[convertedChosenCharacter - 1].HP;
                     string characterSkill = characters[convertedChosenCharacter - 1].Skill;
                     int characterDMG = characters[convertedChosenCharacter - 1].DMG;
                     bool characterDodgedMove = false;
@@ -384,28 +389,29 @@ namespace MushroomPocket {
 
                     Console.Write("Please choose your opponent: ");
                     string opposingCharacter = Console.ReadLine();
+                    Console.WriteLine("-------------------------------------");
 
                     if (int.TryParse(opposingCharacter, out int convertedOpposingCharacter)) {
                         if ((convertedOpposingCharacter <= characters.Count) && (convertedOpposingCharacter > 0)) {
                             string opposingCharacterName = characters[convertedOpposingCharacter - 1].Name;
-                            int opposingCharacterHP = characters[convertedOpposingCharacter - 1].HP;
                             string opposingCharacterSkill = characters[convertedOpposingCharacter - 1].Skill;
                             int opposingCharacterDMG = characters[convertedOpposingCharacter - 1].DMG;
                             // PC will have no dodges
 
-                            Console.WriteLine("-------------BATTLE START-------------");
+                            Console.WriteLine("");
+                            Console.WriteLine("-------------BATTLE START------------");
                             for (int j = 0; j < 3; j++) {
-                                Console.WriteLine("**********************************************");
+                                Console.WriteLine("*************************************");
                                 Console.WriteLine($"Round ({j + 1}/3)");
-                                Console.WriteLine("**********************************************");
+                                Console.WriteLine("*************************************");
                                 Console.WriteLine("---------YOUR TURN---------");
                                 Console.WriteLine($"Your character: {characterName}");
-                                Console.WriteLine($"Your HP: {characterHP}");
+                                Console.WriteLine($"Your HP: {characterStartingHP}");
                                 Console.WriteLine($"Your skill: {characterSkill} ({characterDMG} DMG)");
                                 Console.WriteLine($"Dodges left: {characterDodgesLeft}");
                                 Console.WriteLine("");
                                 Console.WriteLine($"Opposing character: {opposingCharacterName}");
-                                Console.WriteLine($"Opposing HP: {opposingCharacterHP}");
+                                Console.WriteLine($"Opposing HP: {opposingStartingHP}");
                                 Console.WriteLine($"Opposing skill: {opposingCharacterSkill} ({opposingCharacterDMG} DMG)");
                                 Console.WriteLine("---------------------------");
                                 Console.WriteLine("");
@@ -414,7 +420,7 @@ namespace MushroomPocket {
                                     Console.Write($"Enter A to attack or D to dodge next opposing attack: ");
                                     string characterMove = Console.ReadLine().ToUpper();
                                     if (characterMove == "A") {
-                                        opposingCharacterHP -=  characterDMG;
+                                        opposingStartingHP -=  characterDMG;
                                         Console.WriteLine("");
                                         Console.WriteLine($"You dealt {characterDMG} damage to {opposingCharacterName}!");
                                         break;
@@ -440,7 +446,7 @@ namespace MushroomPocket {
                                 Console.WriteLine("");
                                 Console.WriteLine("---------OPPONENT'S TURN---------");
                                 if (characterDodgedMove != true) {
-                                    characterHP -= opposingCharacterDMG;
+                                    characterStartingHP -= opposingCharacterDMG;
                                     Console.WriteLine($"Opposing {opposingCharacterName} dealt {opposingCharacterDMG} damage to you!");
                                 }
                                 else {
@@ -452,13 +458,13 @@ namespace MushroomPocket {
                             Console.WriteLine("");
                             Console.WriteLine("*********RESULTS*********");
                             Console.WriteLine("");
-                            Console.WriteLine($"Your {characterName}'s remaining HP: {characterHP}");
-                            Console.WriteLine($"Opposing {opposingCharacterName}'s remaining HP: {opposingCharacterHP}");
-                            if (characterHP > opposingCharacterHP) {
+                            Console.WriteLine($"Your {characterName}'s remaining HP: {characterStartingHP}");
+                            Console.WriteLine($"Opposing {opposingCharacterName}'s remaining HP: {opposingStartingHP}");
+                            if (characterStartingHP > opposingStartingHP) {
                                 Console.WriteLine("");
                                 Console.WriteLine("Congratulations! You've won the battle!");
                             }
-                            else if (opposingCharacterHP > characterHP) {
+                            else if (opposingStartingHP > characterStartingHP) {
                                 Console.WriteLine("");
                                 Console.WriteLine("The opponent has won the battle. Better luck next time!");
                             }
