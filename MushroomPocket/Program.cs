@@ -447,7 +447,7 @@ namespace MushroomPocket {
                                     Console.WriteLine($"You dodged {opposingCharacterName}'s attack!");
                                     characterDodgedMove = false;
                                 }
-                                Console.WriteLine("--------------------------------");
+                                Console.WriteLine("---------------------------------");
                             }
                             Console.WriteLine("");
                             Console.WriteLine("*********RESULTS*********");
