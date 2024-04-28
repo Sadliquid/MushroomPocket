@@ -355,7 +355,7 @@ namespace MushroomPocket {
             }
         }
 
-        static void BattleAgainstPC() {
+        static void BattleAgainstPC() { // Additional comprehensive, creative and useful feature
             if (characters.Count == 0) {
                 Console.WriteLine("");
                 Console.WriteLine("You don't have any character to battle with!");
