@@ -19,6 +19,7 @@ This console application let Super Mario’s players keep, view the characters t
 ## Notes
 - You can only add the 3 base characters (Daisy, Wario, and Waluigi) to your pocket, which can be transformed if you meet the requirements
 - You need 2 Daisy's to transform into Peach, 3 Warios to transform into Mario and only 1 Waluigi to transform into Luigi
+- All characters' health will be temporarily set to 100 for battle. This won't affect the original health of your characters.
 - You can use transformations in Battle Mode
 - You only have 2 dodges against the opposing character's attack
 - The character that remains with the most HP after all 3 battle rounds wins the battle!
