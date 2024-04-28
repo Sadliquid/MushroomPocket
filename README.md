@@ -3,18 +3,18 @@ This is a C# school project that im working on, which covers OOP and Entity Fram
 
 This console application let Super Mario’s players keep, view the characters they played and check if they can transform to a higher role character to protect the Mushroom Kingdom. If the characters in the pocket are ready to transform, the player can transform their characters. Each time the player played a character, they can add the character details to their Mushroom Pocket.
 
-## How to use
-1.) Add a character to your pocket
+## How to use MushroomPocket
+(1). Add a character to your pocket
 
-2.) List character(s) in your pocket
+(2). List character(s) in your pocket
 
-3.) Check if you can transform your characters
+(3). Check if you can transform your characters
 
-4.) Transform all your eligible characters
+(4). Transform all your eligible characters
 
-5.) Remove a character from your pocket
+(5). Remove a character from your pocket
 
-6.) Battle against the PC!
+(6). Battle against the PC!
 
 ## Notes
 - You can only add the 3 base characters (Daisy, Wario, and Waluigi) to your pocket, which can be transformed if you meet the requirements
