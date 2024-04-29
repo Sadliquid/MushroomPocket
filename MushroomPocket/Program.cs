@@ -67,6 +67,7 @@ namespace MushroomPocket {
             string character = Console.ReadLine().Trim();
 
             if (character != "Waluigi" && character != "Daisy" && character != "Wario") {
+                Console.WriteLine("");
                 Console.WriteLine("Invalid character. Please try again."); // if character isnt accepted
                 return;
             }
@@ -337,7 +338,8 @@ namespace MushroomPocket {
 
             try {
                 int convertedCharacterToDelete = int.Parse(characterToDelete);
-                if (convertedCharacterToDelete > characters.Count()) {
+                if ((convertedCharacterToDelete > characters.Count()) || (convertedCharacterToDelete <= 0)) {
+                    Console.WriteLine("");
                     Console.WriteLine("No such character!");
                     return;
                 }
@@ -350,6 +352,7 @@ namespace MushroomPocket {
             }
 
             catch {
+                Console.WriteLine("");
                 Console.WriteLine("Please enter a valid integer.");
                 return;
             }
