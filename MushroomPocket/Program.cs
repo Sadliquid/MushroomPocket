@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks.Dataflow;
 using System.Text.RegularExpressions;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace MushroomPocket {
     class Program {
-        static List<Character> characters = new List<Character>(); // list for storing characters
+        static List<Character> characters = new List<Character>();
         static bool noCharactersToTransform = true;
         static bool noEligibleTransformations = true;
         static void Main(string[] args) {   
@@ -16,10 +18,6 @@ namespace MushroomPocket {
                 new MushroomMaster("Wario", 3, "Mario"),
                 new MushroomMaster("Waluigi", 1, "Luigi")
             };
-
-            using (var context = new DatabaseContext()) {
-                context.Database.EnsureCreated();
-            }
 
             while (true) {
                 Console.WriteLine("");
@@ -73,7 +71,7 @@ namespace MushroomPocket {
 
             if (character != "Waluigi" && character != "Daisy" && character != "Wario") {
                 Console.WriteLine("");
-                Console.WriteLine("Invalid character. Please try again."); // if character isnt accepted
+                Console.WriteLine("Invalid character. Please try again.");
                 return;
             }
 
@@ -95,7 +93,7 @@ namespace MushroomPocket {
             Console.Write("Enter Character's EXP: ");
             int exp;
 
-            if  (!int.TryParse(Console.ReadLine(), out exp)) {
+            if (!int.TryParse(Console.ReadLine(), out exp)) {
                 Console.WriteLine("");
                 Console.WriteLine("Invalid EXP. Please try again."); // in case user doesnt key in an integer
                 return;
@@ -107,66 +105,80 @@ namespace MushroomPocket {
                 return;
             }
 
-            if (character == "Waluigi") {
-                using (var context = new DatabaseContext()) { // add Waluigi to database
-                    context.Characters.Add(new Waluigi() {
-                        HP = hp,
-                        EXP = exp
-                    });
-                    context.SaveChanges();
-                }
-                Console.WriteLine("");
-                Console.WriteLine("Waluigi has been added.");
-            }
-            else if (character  == "Daisy") {
+            try {
                 using (var context = new DatabaseContext()) {
-                    context.Characters.Add(new Daisy() { // add Daisy to characters list
-                        HP = hp,
-                        EXP = exp
-                    });
-                    context.SaveChanges();
+                    Character characterToAdd = null;
+                    if (character == "Waluigi") {
+                        characterToAdd = new Waluigi() {
+                            HP = hp,
+                            EXP = exp
+                        };
+                    }
+                    else if (character == "Daisy") {
+                        characterToAdd = new Daisy() {
+                            HP = hp,
+                            EXP = exp
+                        };
+                    }
+                    else if (character == "Wario") {
+                        characterToAdd = new Wario() {
+                            HP = hp,
+                            EXP = exp
+                        };
+                    }
+
+                    if (characterToAdd != null) {
+                        context.Database.EnsureCreated();
+                        context.Characters.Add(characterToAdd);
+                        context.SaveChanges();
+                        context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");  // force update the database
+                        context.Dispose(); // throw the current database context away
+                        Console.WriteLine("");
+                        Console.WriteLine(character + " has been added!");
+                        if (File.Exists("database.db-shm")) {  // remove to always ensure a clean database state
+                            File.Delete("database.db-shm");
+                        }
+                        if (File.Exists("database.db-wal")) { // also remove this to always ensure a clean database state
+                            File.Delete("database.db-wal");
+                        }
+                    } else {
+                        Console.WriteLine("");
+                        Console.WriteLine("Invalid character. Please try again.");
+                    }
                 }
-                Console.WriteLine("");
-                Console.WriteLine("Daisy has been added.");
             }
-            else if (character == "Wario") {
-                using (var context = new DatabaseContext()) {
-                    characters.Add(new Wario() { // add Wario to characters list
-                        HP = hp,
-                        EXP = exp
-                    });
-                    context.SaveChanges();
-                }
+            catch {
                 Console.WriteLine("");
-                Console.WriteLine("Wario has been added.");
+                Console.WriteLine("An error occurred while adding the character. This is likely a database connection issue.");
             }
         }
 
         static void ListCharacters() {
-            if (characters.Count == 0) {
-                Console.WriteLine("");
-                Console.WriteLine("No characters in your pocket."); // in case there are currently no characters
-                return;
-            }
-
-            for (int i = 0; i < characters.Count - 1; i++) {
-                for (int j = 0; j < characters.Count - 1 - i; j++) {
-                    if (characters[j].HP < characters[j + 1].HP) { // if previous character HP < next character HP
-                        Character placeholder = characters[j]; // create variable to store HP of previous character
-                        characters[j] =  characters[j + 1]; // swap positions
-                        characters[j + 1] = placeholder; // assign placeholder HP to next character (after sorting)
+            using (var context = new DatabaseContext()) {
+                var characters = context.Characters.ToList();
+                if (characters.Count == 0) {
+                    Console.WriteLine("");
+                    Console.WriteLine("No characters in your pocket."); // in case there are currently no characters
+                    return;
+                } else {
+                    characters = characters.OrderByDescending(c => c.HP).ToList();
+                    Console.WriteLine("");
+                    foreach (var character in characters) {
+                        Console.WriteLine("-----------------------------");
+                        Console.WriteLine($"Name: {character.Name}");
+                        Console.WriteLine($"HP: {character.HP}");
+                        Console.WriteLine($"EXP: {character.EXP}");
+                        Console.WriteLine($"Skill: {character.Skill}");
+                        Console.WriteLine("-----------------------------");
                     }
                 }
-            }
-
-            Console.WriteLine("");
-            foreach (var character in characters) {
-                Console.WriteLine("-----------------------------");
-                Console.WriteLine($"Name: {character.Name}");
-                Console.WriteLine($"HP: {character.HP}");
-                Console.WriteLine($"EXP: {character.EXP}");
-                Console.WriteLine($"Skill: {character.Skill}");
-                Console.WriteLine("-----------------------------");
+                context.Dispose();
+                if (File.Exists("database.db-shm")) {  // remove to always ensure a clean database state
+                    File.Delete("database.db-shm");
+                }
+                if (File.Exists("database.db-wal")) { // also remove this to always ensure a clean database state
+                    File.Delete("database.db-wal");
+                }
             }
         }
 
