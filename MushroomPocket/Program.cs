@@ -144,6 +144,13 @@ namespace MushroomPocket {
                     } else {
                         Console.WriteLine("");
                         Console.WriteLine("Invalid character. Please try again.");
+                        context.Dispose();
+                        if (File.Exists("database.db-shm")) {
+                            File.Delete("database.db-shm");
+                        }
+                        if (File.Exists("database.db-wal")) {
+                            File.Delete("database.db-wal");
+                        }
                     }
                 }
             }
@@ -201,6 +208,13 @@ namespace MushroomPocket {
                 if (characters.Count == 0) {
                     Console.WriteLine("");
                     Console.WriteLine("No characters in your pocket.");
+                    context.Dispose();
+                    if (File.Exists("database.db-shm")) {
+                        File.Delete("database.db-shm");
+                    }
+                    if (File.Exists("database.db-wal")) {
+                        File.Delete("database.db-wal");
+                    }
                     return;
                 }
 
@@ -267,6 +281,13 @@ namespace MushroomPocket {
                     if (characters.Count == 0) {
                         Console.WriteLine("");
                         Console.WriteLine("No characters in your pocket.");
+                        context.Dispose();
+                        if (File.Exists("database.db-shm")) {
+                            File.Delete("database.db-shm");
+                        }
+                        if (File.Exists("database.db-wal")) {
+                            File.Delete("database.db-wal");
+                        }
                         return;
                     }
 
@@ -392,6 +413,13 @@ namespace MushroomPocket {
                     if (characters.Count == 0) {
                         Console.WriteLine("");
                         Console.WriteLine("No characters in your pocket to remove!");
+                        context.Dispose();
+                        if (File.Exists("database.db-shm")) {
+                            File.Delete("database.db-shm");
+                        }
+                        if (File.Exists("database.db-wal")) {
+                            File.Delete("database.db-wal");
+                        }
                         return;
                     }
 
@@ -415,6 +443,13 @@ namespace MushroomPocket {
                         if ((convertedCharacterToDelete > characters.Count()) || (convertedCharacterToDelete <= 0)) {
                             Console.WriteLine("");
                             Console.WriteLine("No such character!");
+                            context.Dispose();
+                            if (File.Exists("database.db-shm")) {
+                                File.Delete("database.db-shm");
+                            }
+                            if (File.Exists("database.db-wal")) {
+                                File.Delete("database.db-wal");
+                            }
                             return;
                         }
 
@@ -456,6 +491,13 @@ namespace MushroomPocket {
                 if (characters.Count == 0) {
                     Console.WriteLine("");
                     Console.WriteLine("You don't have any character to battle with!");
+                    context.Dispose();
+                    if (File.Exists("database.db-shm")) {
+                        File.Delete("database.db-shm");
+                    }
+                    if (File.Exists("database.db-wal")) {
+                        File.Delete("database.db-wal");
+                    }
                     return;
                 }
 
