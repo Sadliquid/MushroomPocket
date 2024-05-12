@@ -15,7 +15,7 @@ namespace MushroomPocket{
         }
     }
 
-    public class DatabaseContext : DbContext {
+    public class DatabaseContext : DbContext { // map classes to their respective tables
         public DbSet<Character> Characters { get; set; }
         public DbSet<Waluigi> Waluigis { get; set; }
         public DbSet<Daisy> Daisies { get; set; }
@@ -25,7 +25,7 @@ namespace MushroomPocket{
         public DbSet<Luigi> Luigis { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseSqlite("Filename=database.db");
+            optionsBuilder.UseSqlite("Filename=database.db"); // db config
         }
     }
 }

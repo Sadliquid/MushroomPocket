@@ -31,7 +31,7 @@ namespace MushroomPocket {
                 Console.WriteLine("(5). Remove a character from my pocket");
                 Console.WriteLine("(6). Battle against the PC");
                 Console.Write("Please only enter [1, 2, 3, 4, 5, 6] or Q to quit: ");
-                string choice = Console.ReadLine().ToUpper(); // so upper and lowercase is accepted
+                string choice = Console.ReadLine().ToUpper();
 
                 if (choice == "1") {
                     AddCharacter();
@@ -80,7 +80,7 @@ namespace MushroomPocket {
 
             if (!int.TryParse(Console.ReadLine(), out hp)) {
                 Console.WriteLine("");
-                Console.WriteLine("Invalid HP. Please try again."); // in case user doesnt key in an integer
+                Console.WriteLine("Invalid HP. Please try again.");
                 return;
             }
 
@@ -95,7 +95,7 @@ namespace MushroomPocket {
 
             if (!int.TryParse(Console.ReadLine(), out exp)) {
                 Console.WriteLine("");
-                Console.WriteLine("Invalid EXP. Please try again."); // in case user doesnt key in an integer
+                Console.WriteLine("Invalid EXP. Please try again.");
                 return;
             }
 
@@ -131,7 +131,7 @@ namespace MushroomPocket {
                         context.Database.EnsureCreated();
                         context.Characters.Add(characterToAdd);
                         context.SaveChanges();
-                        context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");  // force update the database
+                        context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)"); // force update the database
                         context.Dispose(); // throw the current database context away
                         Console.WriteLine("");
                         Console.WriteLine(character + " has been added!");
@@ -160,7 +160,7 @@ namespace MushroomPocket {
                 var characters = context.Characters.ToList();
                 if (characters.Count == 0) {
                     Console.WriteLine("");
-                    Console.WriteLine("No characters in your pocket."); // in case there are currently no characters
+                    Console.WriteLine("No characters in your pocket.");
                     context.Dispose();
                     if (File.Exists("database.db-shm")) {
                         File.Delete("database.db-shm");
@@ -220,10 +220,10 @@ namespace MushroomPocket {
                     }
 
                     else if (index == 1) {
-                        int warioCount = characters.Count(c => c.Name == master.Name); // count number of characters where name is "Wario"
+                        int warioCount = characters.Count(c => c.Name == master.Name);
                         if (warioCount >= 3) {
                             noCharactersToTransform = false;
-                            int eligibleWarios = warioCount / master.NoToTransform; // floor divide
+                            int eligibleWarios = warioCount / master.NoToTransform;
                             for (int i = 0; i < eligibleWarios; i++) {
                                 Console.WriteLine(master.Name + " --> " + master.TransformTo);
                             }
@@ -232,10 +232,10 @@ namespace MushroomPocket {
                     }
                     
                     else if (index == 2) {
-                        int waluigiCount = characters.Count(c => c.Name == master.Name); // count number of characters where name is "Waluigi"
+                        int waluigiCount = characters.Count(c => c.Name == master.Name);
                         if (waluigiCount >= 1) {
                             noCharactersToTransform = false;
-                            int eligibleWaluigis = waluigiCount / master.NoToTransform; // floor divide
+                            int eligibleWaluigis = waluigiCount / master.NoToTransform;
                             for (int i = 0; i < eligibleWaluigis; i++) {
                                 Console.WriteLine(master.Name + " --> " + master.TransformTo);
                             }
@@ -285,7 +285,7 @@ namespace MushroomPocket {
                                         context.Characters.Remove(characters[i]);
                                         daisysRemoved += 1;
                                         if (daisysRemoved == daisysToRemove) {
-                                            break; // so we dont remove more than needed
+                                            break; // so dont remove more than needed
                                         }
                                     }
                                 }
