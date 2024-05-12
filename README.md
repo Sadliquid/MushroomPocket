@@ -57,7 +57,8 @@ The following are where I sourced for info and got help from throughout this who
 - [ChatGPT](chatgpt.com)
 
 The following AI tool was used to aid me in the Entity Framework section of this assignment:
-[Link to conversation](https://chat.openai.com/share/7b183fae-63ca-4dd4-9f1d-bbffa0732616)
+
+[Link to ChatGPT conversation](https://chat.openai.com/share/7b183fae-63ca-4dd4-9f1d-bbffa0732616)
 
 
 ## Submission details
