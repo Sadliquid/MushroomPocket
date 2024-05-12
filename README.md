@@ -40,6 +40,12 @@ Luigi (Precision and Accuracy): 21 DMG
 
 *Mario has the most damage, being the main character in the game!*
 
+## Installed packages
+`dotnet add package Microsoft.EntityFrameworkCore.Sqlite`
+
+`dotnet add package Microsoft.EntityFrameworkCore.Design`
+
+
 ## Sources and credits
 The following are where I sourced for info and got help from throughout this whole project, as well as owe credit to:
 - [Looping though an array (W3 Schools)](https://www.w3schools.com/cs/cs_arrays_loop.php)
