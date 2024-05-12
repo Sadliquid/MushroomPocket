@@ -382,7 +382,7 @@ namespace MushroomPocket {
             Console.Write("Please choose your character: ");
             string chosenCharacter = Console.ReadLine();
 
-            if (int.TryParse(chosenCharacter, out int convertedChosenCharacter)) { // try converting to integer and assign it to convertedChosenCharacter
+            if (int.TryParse(chosenCharacter, out int convertedChosenCharacter)) { // try convert to integer and assign it to convertedChosenCharacter
                 if ((convertedChosenCharacter <= characters.Count) && (convertedChosenCharacter > 0)) {
                     string characterName = characters[convertedChosenCharacter - 1].Name;
                     string characterSkill = characters[convertedChosenCharacter - 1].Skill;
@@ -399,7 +399,7 @@ namespace MushroomPocket {
                             string opposingCharacterName = characters[convertedOpposingCharacter - 1].Name;
                             string opposingCharacterSkill = characters[convertedOpposingCharacter - 1].Skill;
                             int opposingCharacterDMG = characters[convertedOpposingCharacter - 1].DMG;
-                            // PC will have no dodges
+                            // PC have no dodges
 
                             Console.WriteLine("");
                             Console.WriteLine("-------------BATTLE START------------");
@@ -511,8 +511,7 @@ namespace MushroomPocket {
     }
 
     public class Waluigi : Character { // Waluigi's character subclass
-        public Waluigi()
-        {
+        public Waluigi() {
             Name = "Waluigi";
             Skill = "Agility";
             DMG = 18;
@@ -520,8 +519,7 @@ namespace MushroomPocket {
     }
 
     public class Daisy : Character { // Daisy's character subclass
-        public Daisy()
-        {
+        public Daisy() {
             Name = "Daisy";
             Skill = "Leadership";
             DMG = 20;
@@ -529,8 +527,7 @@ namespace MushroomPocket {
     }
 
     public class Wario : Character { // Wario's character subclass
-        public Wario()
-        {
+        public Wario() {
             Name = "Wario";
             Skill = "Strength";
             DMG = 25;
@@ -538,8 +535,7 @@ namespace MushroomPocket {
     }
 
     public class Peach : Character { // Peach's character subclass
-        public Peach()
-        {
+        public Peach() {
             Name = "Peach";
             Skill = "Magic Abilities";
             DMG = 22;
@@ -547,8 +543,7 @@ namespace MushroomPocket {
     }
 
     public class Mario : Character { // Mario's character subclass
-        public Mario()
-        {
+        public Mario() {
             Name = "Mario";
             Skill = "Combat Skills";
             DMG = 30;
@@ -556,8 +551,7 @@ namespace MushroomPocket {
     }
 
     public class Luigi : Character { // Luigi's character subclass
-        public Luigi()
-        {
+        public Luigi() {
             Name = "Luigi";
             Skill = "Precision and Accuracy";
             DMG = 21;
