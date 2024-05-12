@@ -48,10 +48,16 @@ The following are where I sourced for info and got help from throughout this who
 - [Bubble Sorting Algorithms (W3 Schools)](https://www.w3schools.com/dsa/dsa_algo_bubblesort.php)
 - [C# Classes (W3 Schools)](https://www.w3schools.com/cs/cs_classes.php)
 - [C# Class Types (C# Corner)](https://www.c-sharpcorner.com/UploadFile/0c1bb2/types-of-classes-in-C-Sharp1/)
+- [Entity Framework Core using SQLite (C# Corner)](https://www.c-sharpcorner.com/article/get-started-with-entity-framework-core-using-sqlite/)
 - [Getters + Setters in C# (W3 Schools)](https://www.w3schools.com/cs/cs_properties.php)
 - [Lists in C# (GeeksForGeeks)](https://www.geeksforgeeks.org/c-sharp-list-class/)
 - [Exceptions in C# (W3 Schools)](https://www.w3schools.com/cs/cs_exceptions.php)
+- [DbSet (Microsoft)](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://learn.microsoft.com/en-us/dotnet/api/system.data.entity.dbset-1%3Fview%3Dentity-framework-6.2.0%23:~:text%3DA%2520DbSet%2520represents%2520the%2520collection,a%2520DbContext%2520using%2520the%2520DbContext.&ved=2ahUKEwjnp4zyuoiGAxX-d2wGHWiZBbYQFnoECBMQAw&usg=AOvVaw0CYGl-mhiemJrwTPhoZZ8T)
 - [Google Gemini](https://gemini.google.com/app)
+- [ChatGPT](chatgpt.com)
+
+The following AI tool was used to aid me in the Entity Framework section of this assignment:
+[Link to conversation](https://chat.openai.com/share/7b183fae-63ca-4dd4-9f1d-bbffa0732616)
 
 
 ## Submission details
