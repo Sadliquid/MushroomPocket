@@ -84,9 +84,9 @@ namespace MushroomPocket {
                 return;
             }
 
-            if (hp < 0) {
+            if (hp <= 0) {
                 Console.WriteLine("");
-                Console.WriteLine("HP must be positive. Please try again."); // ensure valid HP
+                Console.WriteLine("HP must be more than 0. Please try again."); // ensure valid HP
                 return;
             }
 
