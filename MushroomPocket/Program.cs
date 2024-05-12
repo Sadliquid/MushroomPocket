@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks.Dataflow;
 using System.Text.RegularExpressions;
+using System.ComponentModel.DataAnnotations;
 
 namespace MushroomPocket {
     class Program {
@@ -15,6 +16,10 @@ namespace MushroomPocket {
                 new MushroomMaster("Wario", 3, "Mario"),
                 new MushroomMaster("Waluigi", 1, "Luigi")
             };
+
+            using (var context = new DatabaseContext()) {
+                context.Database.EnsureCreated();
+            }
 
             while (true) {
                 Console.WriteLine("");
@@ -103,26 +108,35 @@ namespace MushroomPocket {
             }
 
             if (character == "Waluigi") {
-                characters.Add(new Waluigi() { // add Waluigi to characters list
-                    HP = hp,
-                    EXP = exp
-                });
+                using (var context = new DatabaseContext()) { // add Waluigi to database
+                    context.Characters.Add(new Waluigi() {
+                        HP = hp,
+                        EXP = exp
+                    });
+                    context.SaveChanges();
+                }
                 Console.WriteLine("");
                 Console.WriteLine("Waluigi has been added.");
             }
             else if (character  == "Daisy") {
-                characters.Add(new Daisy() { // add Daisy to characters list
-                    HP = hp,
-                    EXP = exp
-                });
+                using (var context = new DatabaseContext()) {
+                    context.Characters.Add(new Daisy() { // add Daisy to characters list
+                        HP = hp,
+                        EXP = exp
+                    });
+                    context.SaveChanges();
+                }
                 Console.WriteLine("");
                 Console.WriteLine("Daisy has been added.");
             }
             else if (character == "Wario") {
-                characters.Add(new Wario() { // add Wario to characters list
-                    HP = hp,
-                    EXP = exp
-                });
+                using (var context = new DatabaseContext()) {
+                    characters.Add(new Wario() { // add Wario to characters list
+                        HP = hp,
+                        EXP = exp
+                    });
+                    context.SaveChanges();
+                }
                 Console.WriteLine("");
                 Console.WriteLine("Wario has been added.");
             }
@@ -503,6 +517,9 @@ namespace MushroomPocket {
     }
 
     public abstract class Character { // abstract class, avoid direct instances of itself
+        [Key]
+        public int Id { get; set; }
+
         public string Name { get; set; } // getter + setter methods for "Name"
         public int HP { get; set; } // getter + setter methods for "HP"
         public int EXP { get; set; } // getter + setter methods for "EXP"
