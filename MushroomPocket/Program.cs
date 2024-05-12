@@ -449,161 +449,202 @@ namespace MushroomPocket {
         }
 
         static void BattleAgainstPC() { // Additional comprehensive, creative and useful feature
-            if (characters.Count == 0) {
+            using (var context = new DatabaseContext()) {
+                context.Database.EnsureCreated();
+                var characters = context.Characters.ToList();
+
+                if (characters.Count == 0) {
+                    Console.WriteLine("");
+                    Console.WriteLine("You don't have any character to battle with!");
+                    return;
+                }
+
+                int characterStartingHP = 100;
+                int opposingStartingHP = 100;
                 Console.WriteLine("");
-                Console.WriteLine("You don't have any character to battle with!");
-                return;
-            }
-            int characterStartingHP = 100;
-            int opposingStartingHP = 100;
-            Console.WriteLine("");
-            Console.WriteLine("--------------------------BATTLE MODE--------------------------");
-            Console.WriteLine("All characters' HP have been temporarily set to 100 for battle!");
-            Console.WriteLine("---------------------------------------------------------------");
-            Console.WriteLine("");
-            for (int i = 0; i < characters.Count; i++) {
-                Console.WriteLine($"({i + 1}). {characters[i].Name}");
-                Console.WriteLine($"HP: {characterStartingHP}");
-                Console.WriteLine($"EXP: {characters[i].EXP}");
-                Console.WriteLine($"Skill: {characters[i].Skill} ({characters[i].DMG} DMG)");
+                Console.WriteLine("--------------------------BATTLE MODE--------------------------");
+                Console.WriteLine("All characters' HP have been temporarily set to 100 for battle!");
+                Console.WriteLine("---------------------------------------------------------------");
                 Console.WriteLine("");
-            }
-            Console.WriteLine("-------------------------------------");
-            Console.Write("Please choose your character: ");
-            string chosenCharacter = Console.ReadLine();
+                for (int i = 0; i < characters.Count; i++) {
+                    Console.WriteLine($"({i + 1}). {characters[i].Name}");
+                    Console.WriteLine($"HP: {characterStartingHP}");
+                    Console.WriteLine($"EXP: {characters[i].EXP}");
+                    Console.WriteLine($"Skill: {characters[i].Skill} ({characters[i].DMG} DMG)");
+                    Console.WriteLine("");
+                }
+                Console.WriteLine("-------------------------------------");
+                Console.Write("Please choose your character: ");
+                string chosenCharacter = Console.ReadLine();
 
-            if (int.TryParse(chosenCharacter, out int convertedChosenCharacter)) { // try convert to integer and assign it to convertedChosenCharacter
-                if ((convertedChosenCharacter <= characters.Count) && (convertedChosenCharacter > 0)) {
-                    string characterName = characters[convertedChosenCharacter - 1].Name;
-                    string characterSkill = characters[convertedChosenCharacter - 1].Skill;
-                    int characterDMG = characters[convertedChosenCharacter - 1].DMG;
-                    bool characterDodgedMove = false;
-                    int characterDodgesLeft = 2; // player only has 2 dodges
+                if (int.TryParse(chosenCharacter, out int convertedChosenCharacter)) { // try convert to integer and assign it to convertedChosenCharacter
+                    if ((convertedChosenCharacter <= characters.Count) && (convertedChosenCharacter > 0)) {
+                        string characterName = characters[convertedChosenCharacter - 1].Name;
+                        string characterSkill = characters[convertedChosenCharacter - 1].Skill;
+                        int characterDMG = characters[convertedChosenCharacter - 1].DMG;
+                        bool characterDodgedMove = false;
+                        int characterDodgesLeft = 2; // player only has 2 dodges
 
-                    Console.Write("Please choose your opponent: ");
-                    string opposingCharacter = Console.ReadLine();
-                    Console.WriteLine("-------------------------------------");
+                        Console.Write("Please choose your opponent: ");
+                        string opposingCharacter = Console.ReadLine();
+                        Console.WriteLine("-------------------------------------");
 
-                    if (int.TryParse(opposingCharacter, out int convertedOpposingCharacter)) {
-                        if ((convertedOpposingCharacter <= characters.Count) && (convertedOpposingCharacter > 0)) {
-                            string opposingCharacterName = characters[convertedOpposingCharacter - 1].Name;
-                            string opposingCharacterSkill = characters[convertedOpposingCharacter - 1].Skill;
-                            int opposingCharacterDMG = characters[convertedOpposingCharacter - 1].DMG;
-                            // PC have no dodges
+                        if (int.TryParse(opposingCharacter, out int convertedOpposingCharacter)) {
+                            if ((convertedOpposingCharacter <= characters.Count) && (convertedOpposingCharacter > 0)) {
+                                string opposingCharacterName = characters[convertedOpposingCharacter - 1].Name;
+                                string opposingCharacterSkill = characters[convertedOpposingCharacter - 1].Skill;
+                                int opposingCharacterDMG = characters[convertedOpposingCharacter - 1].DMG;
+                                // PC have no dodges
 
-                            Console.WriteLine("");
-                            Console.WriteLine("-------------BATTLE START------------");
-                            for (int j = 0; j < 3; j++) {
-                                Console.WriteLine("*************************************");
-                                Console.WriteLine($"Round ({j + 1}/3)");
-                                Console.WriteLine("*************************************");
-                                Console.WriteLine("---------YOUR TURN---------");
-                                Console.WriteLine($"Your character: {characterName}");
-                                Console.WriteLine($"Your HP: {characterStartingHP}");
-                                Console.WriteLine($"Your skill: {characterSkill} ({characterDMG} DMG)");
-                                Console.WriteLine($"Dodges left: {characterDodgesLeft}");
                                 Console.WriteLine("");
-                                Console.WriteLine($"Opposing character: {opposingCharacterName}");
-                                Console.WriteLine($"Opposing HP: {opposingStartingHP}");
-                                Console.WriteLine($"Opposing skill: {opposingCharacterSkill} ({opposingCharacterDMG} DMG)");
-                                Console.WriteLine("---------------------------");
-                                Console.WriteLine("");
+                                Console.WriteLine("-------------BATTLE START------------");
+                                for (int j = 0; j < 3; j++) {
+                                    Console.WriteLine("*************************************");
+                                    Console.WriteLine($"Round ({j + 1}/3)");
+                                    Console.WriteLine("*************************************");
+                                    Console.WriteLine("---------YOUR TURN---------");
+                                    Console.WriteLine($"Your character: {characterName}");
+                                    Console.WriteLine($"Your HP: {characterStartingHP}");
+                                    Console.WriteLine($"Your skill: {characterSkill} ({characterDMG} DMG)");
+                                    Console.WriteLine($"Dodges left: {characterDodgesLeft}");
+                                    Console.WriteLine("");
+                                    Console.WriteLine($"Opposing character: {opposingCharacterName}");
+                                    Console.WriteLine($"Opposing HP: {opposingStartingHP}");
+                                    Console.WriteLine($"Opposing skill: {opposingCharacterSkill} ({opposingCharacterDMG} DMG)");
+                                    Console.WriteLine("---------------------------");
+                                    Console.WriteLine("");
 
-                                while (true) {
-                                    Console.Write($"Enter A to attack or D to dodge next opposing attack: ");
-                                    string characterMove = Console.ReadLine().ToUpper();
-                                    if (characterMove == "A") {
-                                        opposingStartingHP -=  characterDMG;
-                                        Console.WriteLine("");
-                                        Console.WriteLine($"You dealt {characterDMG} damage to {opposingCharacterName}!");
-                                        break;
-                                    }
-                                    else if (characterMove == "D") {
-                                        if (characterDodgesLeft > 0) {
-                                            characterDodgedMove = true;
-                                            characterDodgesLeft -= 1;
+                                    while (true) {
+                                        Console.Write($"Enter A to attack or D to dodge next opposing attack: ");
+                                        string characterMove = Console.ReadLine().ToUpper();
+                                        if (characterMove == "A") {
+                                            opposingStartingHP -=  characterDMG;
+                                            Console.WriteLine("");
+                                            Console.WriteLine($"You dealt {characterDMG} damage to {opposingCharacterName}!");
                                             break;
                                         }
-                                        else {
+                                        else if (characterMove == "D") {
+                                            if (characterDodgesLeft > 0) {
+                                                characterDodgedMove = true;
+                                                characterDodgesLeft -= 1;
+                                                break;
+                                            }
+                                            else {
+                                                Console.WriteLine("");
+                                                Console.WriteLine("You've run out of dodges!");
+                                                Console.WriteLine("");
+                                            }
+                                        }
+                                        if (characterMove != "A" && characterMove != "D") {
                                             Console.WriteLine("");
-                                            Console.WriteLine("You've run out of dodges!");
+                                            Console.WriteLine("Invalid input!");
                                             Console.WriteLine("");
                                         }
                                     }
-                                    if (characterMove != "A" && characterMove != "D") {
-                                        Console.WriteLine("");
-                                        Console.WriteLine("Invalid input!");
-                                        Console.WriteLine("");
+                                    Console.WriteLine("");
+                                    Console.WriteLine("---------OPPONENT'S TURN---------");
+                                    if (characterDodgedMove != true) {
+                                        characterStartingHP -= opposingCharacterDMG;
+                                        Console.WriteLine($"Opposing {opposingCharacterName} dealt {opposingCharacterDMG} damage to you!");
                                     }
+                                    else {
+                                        Console.WriteLine($"You dodged {opposingCharacterName}'s attack!");
+                                        characterDodgedMove = false;
+                                    }
+                                    Console.WriteLine("---------------------------------");
                                 }
                                 Console.WriteLine("");
-                                Console.WriteLine("---------OPPONENT'S TURN---------");
-                                if (characterDodgedMove != true) {
-                                    characterStartingHP -= opposingCharacterDMG;
-                                    Console.WriteLine($"Opposing {opposingCharacterName} dealt {opposingCharacterDMG} damage to you!");
+                                Console.WriteLine("*********RESULTS*********");
+                                Console.WriteLine("");
+                                Console.WriteLine($"Your {characterName}'s remaining HP: {characterStartingHP}");
+                                Console.WriteLine($"Opposing {opposingCharacterName}'s remaining HP: {opposingStartingHP}");
+                                if (characterStartingHP > opposingStartingHP) {
+                                    Console.WriteLine("");
+                                    Console.WriteLine("Congratulations! You've won the battle!");
+                                }
+                                else if (opposingStartingHP > characterStartingHP) {
+                                    Console.WriteLine("");
+                                    Console.WriteLine("The opponent has won the battle. Better luck next time!");
                                 }
                                 else {
-                                    Console.WriteLine($"You dodged {opposingCharacterName}'s attack!");
-                                    characterDodgedMove = false;
+                                    Console.WriteLine("");
+                                    Console.WriteLine("This battle was a draw! Fair match and well played!");
                                 }
-                                Console.WriteLine("---------------------------------");
-                            }
-                            Console.WriteLine("");
-                            Console.WriteLine("*********RESULTS*********");
-                            Console.WriteLine("");
-                            Console.WriteLine($"Your {characterName}'s remaining HP: {characterStartingHP}");
-                            Console.WriteLine($"Opposing {opposingCharacterName}'s remaining HP: {opposingStartingHP}");
-                            if (characterStartingHP > opposingStartingHP) {
-                                Console.WriteLine("");
-                                Console.WriteLine("Congratulations! You've won the battle!");
-                            }
-                            else if (opposingStartingHP > characterStartingHP) {
-                                Console.WriteLine("");
-                                Console.WriteLine("The opponent has won the battle. Better luck next time!");
+                                context.Dispose();
+                                if (File.Exists("database.db-shm")) {
+                                    File.Delete("database.db-shm");
+                                }
+                                if (File.Exists("database.db-wal")) {
+                                    File.Delete("database.db-wal");
+                                }
                             }
                             else {
                                 Console.WriteLine("");
-                                Console.WriteLine("This battle was a draw! Fair match and well played!");
+                                Console.WriteLine("No such character!");
+                                context.Dispose();
+                                if (File.Exists("database.db-shm")) {
+                                    File.Delete("database.db-shm");
+                                }
+                                if (File.Exists("database.db-wal")) {
+                                    File.Delete("database.db-wal");
+                                }
+                                return;
                             }
                         }
                         else {
                             Console.WriteLine("");
-                            Console.WriteLine("No such character!");
+                            Console.WriteLine("Please enter a valid integer.");
+                            context.Dispose();
+                            if (File.Exists("database.db-shm")) {
+                                File.Delete("database.db-shm");
+                            }
+                            if (File.Exists("database.db-wal")) {
+                                File.Delete("database.db-wal");
+                            }
                             return;
                         }
                     }
                     else {
                         Console.WriteLine("");
-                        Console.WriteLine("Please enter a valid integer.");
+                        Console.WriteLine("No such character!");
+                        context.Dispose();
+                        if (File.Exists("database.db-shm")) {
+                            File.Delete("database.db-shm");
+                        }
+                        if (File.Exists("database.db-wal")) {
+                            File.Delete("database.db-wal");
+                        }
                         return;
                     }
                 }
                 else {
                     Console.WriteLine("");
-                    Console.WriteLine("No such character!");
+                    Console.WriteLine("Please enter a valid integer.");
+                    context.Dispose();
+                    if (File.Exists("database.db-shm")) {
+                        File.Delete("database.db-shm");
+                    }
+                    if (File.Exists("database.db-wal")) {
+                        File.Delete("database.db-wal");
+                    }
                     return;
                 }
-            }
-            else {
-                Console.WriteLine("");
-                Console.WriteLine("Please enter a valid integer.");
-                return;
             }
         }
     }
 
     public abstract class Character { // abstract class, avoid direct instances of itself
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } // primary key
 
-        public string Name { get; set; } // getter + setter methods for "Name"
-        public int HP { get; set; } // getter + setter methods for "HP"
-        public int EXP { get; set; } // getter + setter methods for "EXP"
-        public string Skill { get; set; } // getter + setter methods for "Skill"
-        public int DMG { get; set; } // getter + setter methods for "DMG"
+        public string Name { get; set; }
+        public int HP { get; set; }
+        public int EXP { get; set; }
+        public string Skill { get; set; }
+        public int DMG { get; set; }
     }
 
-    public class Waluigi : Character { // Waluigi's character subclass
+    public class Waluigi : Character {
         public Waluigi() {
             Name = "Waluigi";
             Skill = "Agility";
@@ -611,7 +652,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Daisy : Character { // Daisy's character subclass
+    public class Daisy : Character {
         public Daisy() {
             Name = "Daisy";
             Skill = "Leadership";
@@ -619,7 +660,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Wario : Character { // Wario's character subclass
+    public class Wario : Character {
         public Wario() {
             Name = "Wario";
             Skill = "Strength";
@@ -627,7 +668,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Peach : Character { // Peach's character subclass
+    public class Peach : Character {
         public Peach() {
             Name = "Peach";
             Skill = "Magic Abilities";
@@ -635,7 +676,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Mario : Character { // Mario's character subclass
+    public class Mario : Character {
         public Mario() {
             Name = "Mario";
             Skill = "Combat Skills";
@@ -643,7 +684,7 @@ namespace MushroomPocket {
         }
     }
 
-    public class Luigi : Character { // Luigi's character subclass
+    public class Luigi : Character {
         public Luigi() {
             Name = "Luigi";
             Skill = "Precision and Accuracy";
