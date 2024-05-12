@@ -155,6 +155,7 @@ namespace MushroomPocket {
 
         static void ListCharacters() {
             using (var context = new DatabaseContext()) {
+                context.Database.EnsureCreated();
                 var characters = context.Characters.ToList();
                 if (characters.Count == 0) {
                     Console.WriteLine("");
