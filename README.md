@@ -55,16 +55,21 @@ The following are where I sourced for info and got help from throughout this who
 - [C# Classes (W3 Schools)](https://www.w3schools.com/cs/cs_classes.php)
 - [C# Class Types (C# Corner)](https://www.c-sharpcorner.com/UploadFile/0c1bb2/types-of-classes-in-C-Sharp1/)
 - [Entity Framework Core using SQLite (C# Corner)](https://www.c-sharpcorner.com/article/get-started-with-entity-framework-core-using-sqlite/)
+- [Database Contexts in C# (C# Corner)](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.c-sharpcorner.com/article/entity-framework-dbcontext/%23:~:text%3DAs%2520per%2520Microsoft%2520%25E2%2580%259CA%2520DbContext,between%2520Entity%2520Framework%2520and%2520Database.&ved=2ahUKEwi8oOjs0peGAxV5e2wGHfwyCAkQFnoECA4QAw&usg=AOvVaw2Ra8ic4MBwiJbUtWeAk2vi)
+- [Executing raw SQL statements for SQLite DB operations (Stack Overflow)](https://stackoverflow.com/questions/64125596/how-to-use-context-database-executesqlinterpolated)
+- [Manually performing checkpoints in SQLite Databases](https://stackoverflow.com/questions/64125596/how-to-use-context-database-executesqlinterpolated)
 - [Getters + Setters in C# (W3 Schools)](https://www.w3schools.com/cs/cs_properties.php)
 - [Lists in C# (GeeksForGeeks)](https://www.geeksforgeeks.org/c-sharp-list-class/)
 - [Exceptions in C# (W3 Schools)](https://www.w3schools.com/cs/cs_exceptions.php)
 - [DbSet (Microsoft)](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://learn.microsoft.com/en-us/dotnet/api/system.data.entity.dbset-1%3Fview%3Dentity-framework-6.2.0%23:~:text%3DA%2520DbSet%2520represents%2520the%2520collection,a%2520DbContext%2520using%2520the%2520DbContext.&ved=2ahUKEwjnp4zyuoiGAxX-d2wGHWiZBbYQFnoECBMQAw&usg=AOvVaw0CYGl-mhiemJrwTPhoZZ8T)
+
+The following AI tools were used to aid me in the Entity Framework section of this assignment:
+
 - [Google Gemini](https://gemini.google.com/app)
 - [ChatGPT](chatgpt.com)
 
-The following AI tool was used to aid me in the Entity Framework section of this assignment:
-
-[Link to ChatGPT conversation](https://chat.openai.com/share/7b183fae-63ca-4dd4-9f1d-bbffa0732616)
+- [Link to ChatGPT conversation](https://chat.openai.com/share/7b183fae-63ca-4dd4-9f1d-bbffa0732616)
+- [Link to Google Gemini (was previously Bard) conversation](https://g.co/gemini/share/2c1bb1c6831a)
 
 
 ## Submission details
