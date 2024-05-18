@@ -74,6 +74,8 @@ The following AI tools were used to aid me in the Entity Framework section of th
 
 ## Submission details
 
+Advanced Programming
+
 Joshua Long (230627W)
 
 IT2154 Group 1
