@@ -65,8 +65,8 @@ The following are where I sourced for info and got help from throughout this who
 
 The following AI tools were used to aid me in the Entity Framework section of this assignment:
 
-- [Google Gemini](https://gemini.google.com/app)
 - [ChatGPT](chatgpt.com)
+- [Google Gemini](https://gemini.google.com/app)
 
 - [Link to ChatGPT conversation](https://chat.openai.com/share/7b183fae-63ca-4dd4-9f1d-bbffa0732616)
 - [Link to Google Gemini (was previously Bard) conversation](https://g.co/gemini/share/2c1bb1c6831a)
