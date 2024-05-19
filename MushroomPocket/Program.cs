@@ -64,6 +64,15 @@ namespace MushroomPocket {
             }
         }
 
+        static void RemoveTempFiles() {
+            if (File.Exists("database.db-shm")) {  // remove to always ensure a clean database state
+                File.Delete("database.db-shm");
+            }
+            if (File.Exists("database.db-wal")) { // also remove this to always ensure a clean database state
+                File.Delete("database.db-wal");
+            }
+        }
+
         static void AddCharacter() {
             Console.WriteLine("");
             Console.Write("Enter Character's name: ");
@@ -135,22 +144,12 @@ namespace MushroomPocket {
                         context.Dispose(); // throw the current database context away
                         Console.WriteLine("");
                         Console.WriteLine(character + " has been added!");
-                        if (File.Exists("database.db-shm")) {  // remove to always ensure a clean database state
-                            File.Delete("database.db-shm");
-                        }
-                        if (File.Exists("database.db-wal")) { // also remove this to always ensure a clean database state
-                            File.Delete("database.db-wal");
-                        }
+                        RemoveTempFiles();
                     } else {
                         Console.WriteLine("");
                         Console.WriteLine("Invalid character. Please try again.");
                         context.Dispose();
-                        if (File.Exists("database.db-shm")) {
-                            File.Delete("database.db-shm");
-                        }
-                        if (File.Exists("database.db-wal")) {
-                            File.Delete("database.db-wal");
-                        }
+                        RemoveTempFiles();
                     }
                 }
             }
@@ -169,12 +168,7 @@ namespace MushroomPocket {
                     Console.WriteLine("");
                     Console.WriteLine("No characters in your pocket.");
                     context.Dispose();
-                    if (File.Exists("database.db-shm")) {
-                        File.Delete("database.db-shm");
-                    }
-                    if (File.Exists("database.db-wal")) {
-                        File.Delete("database.db-wal");
-                    }
+                    RemoveTempFiles();
                     return;
                 } else {
                     characters = characters.OrderByDescending(c => c.HP).ToList();
@@ -188,12 +182,7 @@ namespace MushroomPocket {
                         Console.WriteLine("-----------------------------");
                     }
                     context.Dispose();
-                    if (File.Exists("database.db-shm")) {
-                        File.Delete("database.db-shm");
-                    }
-                    if (File.Exists("database.db-wal")) {
-                        File.Delete("database.db-wal");
-                    }
+                    RemoveTempFiles();
                 }
             }
         }
@@ -209,12 +198,7 @@ namespace MushroomPocket {
                     Console.WriteLine("");
                     Console.WriteLine("No characters in your pocket.");
                     context.Dispose();
-                    if (File.Exists("database.db-shm")) {
-                        File.Delete("database.db-shm");
-                    }
-                    if (File.Exists("database.db-wal")) {
-                        File.Delete("database.db-wal");
-                    }
+                    RemoveTempFiles();
                     return;
                 }
 
@@ -262,12 +246,7 @@ namespace MushroomPocket {
                     Console.WriteLine("No characters to transform.");
                 }
                 context.Dispose();
-                if (File.Exists("database.db-shm")) {
-                    File.Delete("database.db-shm");
-                }
-                if (File.Exists("database.db-wal")) {
-                    File.Delete("database.db-wal");
-                }
+                RemoveTempFiles();
             }
         }
 
@@ -282,12 +261,7 @@ namespace MushroomPocket {
                         Console.WriteLine("");
                         Console.WriteLine("No characters in your pocket.");
                         context.Dispose();
-                        if (File.Exists("database.db-shm")) {
-                            File.Delete("database.db-shm");
-                        }
-                        if (File.Exists("database.db-wal")) {
-                            File.Delete("database.db-wal");
-                        }
+                        RemoveTempFiles();
                         return;
                     }
 
@@ -382,19 +356,14 @@ namespace MushroomPocket {
                         }
                     }
 
-                    context.SaveChanges();
-                    context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");
-                    context.Dispose();
-                    if (File.Exists("database.db-shm")) {
-                        File.Delete("database.db-shm");
-                    }
-                    if (File.Exists("database.db-wal")) {
-                        File.Delete("database.db-wal");
-                    }
-
                     if (noEligibleTransformations == true) {
                         Console.WriteLine("Not enough characters to transform!");
+                    } else {
+                        context.SaveChanges();
+                        context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");
                     }
+                    context.Dispose();
+                    RemoveTempFiles();
                 }
             }
 
@@ -414,12 +383,7 @@ namespace MushroomPocket {
                         Console.WriteLine("");
                         Console.WriteLine("No characters in your pocket to remove!");
                         context.Dispose();
-                        if (File.Exists("database.db-shm")) {
-                            File.Delete("database.db-shm");
-                        }
-                        if (File.Exists("database.db-wal")) {
-                            File.Delete("database.db-wal");
-                        }
+                        RemoveTempFiles();
                         return;
                     }
 
@@ -444,12 +408,7 @@ namespace MushroomPocket {
                             Console.WriteLine("");
                             Console.WriteLine("No such character!");
                             context.Dispose();
-                            if (File.Exists("database.db-shm")) {
-                                File.Delete("database.db-shm");
-                            }
-                            if (File.Exists("database.db-wal")) {
-                                File.Delete("database.db-wal");
-                            }
+                            RemoveTempFiles();
                             return;
                         }
 
@@ -459,12 +418,7 @@ namespace MushroomPocket {
                         context.SaveChanges();
                         context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");
                         context.Dispose();
-                        if (File.Exists("database.db-shm")) {
-                            File.Delete("database.db-shm");
-                        }
-                        if (File.Exists("database.db-wal")) {
-                            File.Delete("database.db-wal");
-                        }
+                        RemoveTempFiles();
                         Console.WriteLine("");
                         Console.WriteLine(characterName + "  has been removed from your pocket.");
                     }
@@ -492,12 +446,7 @@ namespace MushroomPocket {
                     Console.WriteLine("");
                     Console.WriteLine("You don't have any character to battle with!");
                     context.Dispose();
-                    if (File.Exists("database.db-shm")) {
-                        File.Delete("database.db-shm");
-                    }
-                    if (File.Exists("database.db-wal")) {
-                        File.Delete("database.db-wal");
-                    }
+                    RemoveTempFiles();
                     return;
                 }
 
@@ -613,23 +562,13 @@ namespace MushroomPocket {
                                     Console.WriteLine("This battle was a draw! Fair match and well played!");
                                 }
                                 context.Dispose();
-                                if (File.Exists("database.db-shm")) {
-                                    File.Delete("database.db-shm");
-                                }
-                                if (File.Exists("database.db-wal")) {
-                                    File.Delete("database.db-wal");
-                                }
+                                RemoveTempFiles();
                             }
                             else {
                                 Console.WriteLine("");
                                 Console.WriteLine("No such character!");
                                 context.Dispose();
-                                if (File.Exists("database.db-shm")) {
-                                    File.Delete("database.db-shm");
-                                }
-                                if (File.Exists("database.db-wal")) {
-                                    File.Delete("database.db-wal");
-                                }
+                                RemoveTempFiles();
                                 return;
                             }
                         }
@@ -637,12 +576,7 @@ namespace MushroomPocket {
                             Console.WriteLine("");
                             Console.WriteLine("Please enter a valid integer.");
                             context.Dispose();
-                            if (File.Exists("database.db-shm")) {
-                                File.Delete("database.db-shm");
-                            }
-                            if (File.Exists("database.db-wal")) {
-                                File.Delete("database.db-wal");
-                            }
+                            RemoveTempFiles();
                             return;
                         }
                     }
@@ -650,12 +584,7 @@ namespace MushroomPocket {
                         Console.WriteLine("");
                         Console.WriteLine("No such character!");
                         context.Dispose();
-                        if (File.Exists("database.db-shm")) {
-                            File.Delete("database.db-shm");
-                        }
-                        if (File.Exists("database.db-wal")) {
-                            File.Delete("database.db-wal");
-                        }
+                        RemoveTempFiles();
                         return;
                     }
                 }
@@ -663,12 +592,7 @@ namespace MushroomPocket {
                     Console.WriteLine("");
                     Console.WriteLine("Please enter a valid integer.");
                     context.Dispose();
-                    if (File.Exists("database.db-shm")) {
-                        File.Delete("database.db-shm");
-                    }
-                    if (File.Exists("database.db-wal")) {
-                        File.Delete("database.db-wal");
-                    }
+                    RemoveTempFiles();
                     return;
                 }
             }
