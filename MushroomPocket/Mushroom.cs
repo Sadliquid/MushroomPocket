@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations; 
 using Microsoft.EntityFrameworkCore;
 
-namespace MushroomPocket{
-    public class MushroomMaster{
-        public string Name {get;set;}
-        public int NoToTransform {get; set;}
-        public  string TransformTo {get; set;}
+namespace MushroomPocket {
+    public class MushroomMaster {
+        public string Name { get;set; }
+        public int NoToTransform { get; set; }
+        public  string TransformTo { get; set; }
 
-        public MushroomMaster(string name, int noToTransform, string transformTo){
+        public MushroomMaster(string name, int noToTransform, string transformTo) {
             this.Name = name;
             this.NoToTransform = noToTransform;
             this.TransformTo = transformTo;
@@ -18,7 +18,7 @@ namespace MushroomPocket{
 
     public abstract class Character { // abstract class, avoid direct instances of itself
         [Key]
-        public int Id { get; set; } // primary key
+        public int Id { get; set; } // { PK }
 
         public string Name { get; set; }
         public int HP { get; set; }
