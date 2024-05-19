@@ -64,6 +64,12 @@ namespace MushroomPocket {
             }
         }
 
+        static void UpdateDB(DatabaseContext context) {
+            context.SaveChanges();
+            context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");
+            context.Dispose();
+        }
+
         static void RemoveTempFiles() {
             if (File.Exists("database.db-shm")) {  // remove to always ensure a clean database state
                 File.Delete("database.db-shm");
@@ -139,9 +145,7 @@ namespace MushroomPocket {
                     if (characterToAdd != null) {
                         context.Database.EnsureCreated();
                         context.Characters.Add(characterToAdd);
-                        context.SaveChanges();
-                        context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)"); // force update the database
-                        context.Dispose(); // throw the current database context away
+                        UpdateDB(context);
                         Console.WriteLine("");
                         Console.WriteLine(character + " has been added!");
                         RemoveTempFiles();
@@ -358,12 +362,11 @@ namespace MushroomPocket {
 
                     if (noEligibleTransformations == true) {
                         Console.WriteLine("Not enough characters to transform!");
+                        context.Dispose();
                     } else {
-                        context.SaveChanges();
-                        context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");
+                        UpdateDB(context);
+                        RemoveTempFiles();
                     }
-                    context.Dispose();
-                    RemoveTempFiles();
                 }
             }
 
@@ -415,9 +418,7 @@ namespace MushroomPocket {
                         string characterName = characters[convertedCharacterToDelete - 1].Name;
 
                         context.Characters.Remove(characters[convertedCharacterToDelete - 1]);
-                        context.SaveChanges();
-                        context.Database.ExecuteSqlInterpolated($"PRAGMA wal_checkpoint(FULL)");
-                        context.Dispose();
+                        UpdateDB(context);
                         RemoveTempFiles();
                         Console.WriteLine("");
                         Console.WriteLine(characterName + "  has been removed from your pocket.");
@@ -552,6 +553,9 @@ namespace MushroomPocket {
                                 if (characterStartingHP > opposingStartingHP) {
                                     Console.WriteLine("");
                                     Console.WriteLine("Congratulations! You've won the battle!");
+                                    characters[convertedChosenCharacter - 1].EXP += 10;  // gain 10 EXP if u win
+                                    UpdateDB(context);
+                                    RemoveTempFiles();
                                 }
                                 else if (opposingStartingHP > characterStartingHP) {
                                     Console.WriteLine("");
