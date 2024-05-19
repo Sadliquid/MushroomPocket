@@ -24,6 +24,7 @@ This console application let Super Mario’s players keep, view the characters t
 - You only have 2 dodges against the opposing character's attack
 - The character that remains with the most HP after all 3 battle rounds wins the battle!
 - If your character and the opposing character has the same HP after all 3 battle rounds, the battle will be a draw
+- Every battle win gains your playing character +10 EXP
 
 ## Character moves
 Daisy (Leadership): 20 DMG
