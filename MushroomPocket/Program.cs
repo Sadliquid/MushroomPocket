@@ -145,7 +145,9 @@ namespace MushroomPocket {
                     if (characterToAdd != null) {
                         context.Database.EnsureCreated();
                         context.Characters.Add(characterToAdd);
+
                         UpdateDB(context);
+
                         Console.WriteLine("");
                         Console.WriteLine(character + " has been added!");
                         RemoveTempFiles();
@@ -275,10 +277,12 @@ namespace MushroomPocket {
                         if (index == 0) {
                             int daisyCount = characters.Count(c => c.Name == master.Name);
                             if (daisyCount >= 2) {
+
                                 noEligibleTransformations = false;
                                 int eligibleDaisys = daisyCount / master.NoToTransform;
                                 int daisysToRemove = eligibleDaisys * master.NoToTransform;
                                 int daisysRemoved = 0;
+
                                 for (int i = characters.Count() - 1; i >= 0; i--) { // loop thru from the back to avoid conflict of indexes at the front
                                     if (characters[i].Name == master.Name) {
                                         context.Characters.Remove(characters[i]);
@@ -305,9 +309,11 @@ namespace MushroomPocket {
                             int warioCount = characters.Count(c => c.Name == master.Name);
                             if (warioCount >= 3) {
                                 noEligibleTransformations = false;
+
                                 int eligibleWarios = warioCount / master.NoToTransform;
                                 int wariosToRemove = eligibleWarios * master.NoToTransform;
                                 int wariosRemoved = 0;
+
                                 for (int i = characters.Count() - 1; i >= 0; i--) {
                                     if (characters[i].Name == master.Name) {
                                         context.Characters.Remove(characters[i]);
@@ -334,9 +340,11 @@ namespace MushroomPocket {
                             int waluigiCount = characters.Count(c => c.Name == master.Name);
                             if (waluigiCount >= 1) {
                                 noEligibleTransformations = false;
+
                                 int eligibleWaluigis = waluigiCount / master.NoToTransform;
                                 int waluigisToRemove = eligibleWaluigis * master.NoToTransform;
                                 int waluigisRemoved = 0;
+
                                 for (int i = characters.Count() - 1; i >= 0; i--) {
                                     if (characters[i].Name == master.Name) {
                                         context.Characters.Remove(characters[i]);
@@ -418,8 +426,10 @@ namespace MushroomPocket {
                         string characterName = characters[convertedCharacterToDelete - 1].Name;
 
                         context.Characters.Remove(characters[convertedCharacterToDelete - 1]);
+
                         UpdateDB(context);
                         RemoveTempFiles();
+                        
                         Console.WriteLine("");
                         Console.WriteLine(characterName + "  has been removed from your pocket.");
                     }
@@ -471,9 +481,13 @@ namespace MushroomPocket {
 
                 if (int.TryParse(chosenCharacter, out int convertedChosenCharacter)) { // try convert to integer and assign it to convertedChosenCharacter
                     if ((convertedChosenCharacter <= characters.Count) && (convertedChosenCharacter > 0)) {
-                        string characterName = characters[convertedChosenCharacter - 1].Name;
-                        string characterSkill = characters[convertedChosenCharacter - 1].Skill;
-                        int characterDMG = characters[convertedChosenCharacter - 1].DMG;
+
+                        var selectedPlayingCharacter = characters[convertedChosenCharacter - 1];
+
+                        string characterName = selectedPlayingCharacter.Name;
+                        string characterSkill = selectedPlayingCharacter.Skill;
+                        int characterDMG = selectedPlayingCharacter.DMG;
+
                         bool characterDodgedMove = false;
                         int characterDodgesLeft = 2; // player only has 2 dodges
 
@@ -483,9 +497,12 @@ namespace MushroomPocket {
 
                         if (int.TryParse(opposingCharacter, out int convertedOpposingCharacter)) {
                             if ((convertedOpposingCharacter <= characters.Count) && (convertedOpposingCharacter > 0)) {
-                                string opposingCharacterName = characters[convertedOpposingCharacter - 1].Name;
-                                string opposingCharacterSkill = characters[convertedOpposingCharacter - 1].Skill;
-                                int opposingCharacterDMG = characters[convertedOpposingCharacter - 1].DMG;
+
+                                var selectedOpposingCharacter = characters[convertedOpposingCharacter - 1];
+
+                                string opposingCharacterName = selectedOpposingCharacter.Name;
+                                string opposingCharacterSkill = selectedOpposingCharacter.Skill;
+                                int opposingCharacterDMG = selectedOpposingCharacter.DMG;
                                 // PC have no dodges
 
                                 Console.WriteLine("");
@@ -553,7 +570,8 @@ namespace MushroomPocket {
                                 if (characterStartingHP > opposingStartingHP) {
                                     Console.WriteLine("");
                                     Console.WriteLine("Congratulations! You've won the battle!");
-                                    characters[convertedChosenCharacter - 1].EXP += 10;  // gain 10 EXP if u win
+                                    selectedPlayingCharacter.EXP += 10;  // gain 10 EXP if u win
+
                                     UpdateDB(context);
                                     RemoveTempFiles();
                                 }
