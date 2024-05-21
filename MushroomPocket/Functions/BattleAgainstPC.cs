@@ -213,12 +213,19 @@ namespace MushroomPocket.Functions {
                                     Thread.Sleep(1500);
                                     Console.WriteLine("");
                                     Console.WriteLine("---------OPPONENT'S TURN---------");
+                                    string[] ellipses = { "..", "...", "...." };
+                                    for (int wait = 0; wait < 3; wait++) {
+                                        Thread.Sleep(1500);
+                                        Console.Write($"\rOpponent is making a turn" + ellipses[wait]);
+                                    }
                                     if (characterDodgedMove != true) {
                                         characterHP -= opposingCharacterDMG;
-                                        Console.WriteLine($"Opposing {opposingCharacterName} dealt {opposingCharacterDMG} damage to you!");
+                                        Thread.Sleep(1500);
+                                        Console.WriteLine($"\rOpposing {opposingCharacterName} dealt {opposingCharacterDMG} damage to you!");
                                     }
                                     else {
-                                        Console.WriteLine($"You dodged {opposingCharacterName}'s attack!");
+                                        Thread.Sleep(1500);
+                                        Console.WriteLine($"\rYou dodged {opposingCharacterName}'s attack!");
                                         characterDodgedMove = false;
                                     }
                                     Console.WriteLine("---------------------------------");
@@ -241,12 +248,12 @@ namespace MushroomPocket.Functions {
                                     Console.WriteLine($"Catch chance: {catchChance}%");
                                     Console.WriteLine("");
 
-                                    Thread.Sleep(2000);
-                                    Console.WriteLine("Wait for it...");
-                                    Thread.Sleep(2000);
-                                    Console.WriteLine("Come on...");
-                                    Thread.Sleep(2000);
-                                    Console.WriteLine("");
+                                    string[] ellipses = { "..", "...", "...." };
+                                    for (int wait = 0; wait < 3; wait++) {
+                                        Thread.Sleep(1500);
+                                        Console.Write($"\rWait for it" + ellipses[wait]);
+                                    }
+                                    Thread.Sleep(1500);
 
                                     int roll = randomNumberGenerator.Next(1, 101);
                                     if (roll <= catchChance) {
@@ -255,6 +262,7 @@ namespace MushroomPocket.Functions {
                                                 HP = 120,
                                                 EXP = 0
                                             });
+                                            Console.WriteLine("");
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
@@ -263,6 +271,7 @@ namespace MushroomPocket.Functions {
                                                 HP = 120,
                                                 EXP = 0
                                             });
+                                            Console.WriteLine("");
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
@@ -271,6 +280,7 @@ namespace MushroomPocket.Functions {
                                                 HP = 120,
                                                 EXP = 0
                                             });
+                                            Console.WriteLine("");
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
@@ -279,6 +289,7 @@ namespace MushroomPocket.Functions {
                                                 HP = 120,
                                                 EXP = 0
                                             });
+                                            Console.WriteLine("");
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
@@ -287,6 +298,7 @@ namespace MushroomPocket.Functions {
                                                 HP = 120,
                                                 EXP = 0
                                             });
+                                            Console.WriteLine("");
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
@@ -295,10 +307,12 @@ namespace MushroomPocket.Functions {
                                                 HP = 120,
                                                 EXP = 0
                                             });
+                                            Console.WriteLine("");
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"Boss {opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
                                         } else {
+                                            Console.WriteLine("");
                                             Console.WriteLine($"An error occured while catching {opposingCharacterName}.");
                                         }
                                         DatabaseManagementFunctions.UpdateDB(context);
