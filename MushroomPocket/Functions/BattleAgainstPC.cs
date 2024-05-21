@@ -8,7 +8,30 @@ namespace MushroomPocket.Functions {
 
         private static Random randomNumberGenerator = new Random();
 
-        private static int CatchRoulette() {
+        public static string CriticalRoulette() {
+            string[] possibilities = { "SUCCESS", "MISSED" };
+            int index = 0;
+
+            Console.WriteLine("");
+            Console.WriteLine("You have a chance to deal CRITICAL DMG! Press ENTER to stop!");
+            while (!Console.KeyAvailable) {
+                index = (index + 1) % possibilities.Length;
+                Console.Write($"\r");
+                for (int i = 0; i < possibilities.Length; i++) {
+                    if (i == index) {
+                        Console.Write($"[{possibilities[i]}] ");
+                    } else {
+                        Console.Write($"");
+                    }
+                }
+                Thread.Sleep(100);
+            }
+            Console.ReadLine();
+
+            return possibilities[index];
+        }
+
+        public static int CatchRoulette() {
             int[] probabilities = { 10, 20, 40, 60, 80, 100, 80, 60, 40, 20, 10 };
             int index = 0;
 
@@ -126,9 +149,11 @@ namespace MushroomPocket.Functions {
                                 Console.WriteLine("");
                                 Console.WriteLine("-------------BATTLE START------------");
                                 for (int j = 0; j < 3; j++) {
+                                    Thread.Sleep(1000);
                                     Console.WriteLine("*************************************");
                                     Console.WriteLine($"Round ({j + 1}/3)");
                                     Console.WriteLine("*************************************");
+                                    Thread.Sleep(1500);
                                     Console.WriteLine("---------YOUR TURN---------");
                                     Console.WriteLine($"Your character: {characterName}");
                                     Console.WriteLine($"Your HP: {characterHP}");
@@ -142,13 +167,24 @@ namespace MushroomPocket.Functions {
                                     Console.WriteLine("");
 
                                     while (true) {
+                                        Thread.Sleep(500);
                                         Console.Write($"Enter A to attack or D to dodge next opposing attack: ");
                                         string characterMove = Console.ReadLine().ToUpper();
                                         if (characterMove == "A") {
-                                            opposingStartingHP -=  characterDMG;
-                                            Console.WriteLine("");
-                                            Console.WriteLine($"You dealt {characterDMG} damage to {opposingCharacterName}!");
-                                            break;
+                                            string critical = CriticalRoulette();
+                                            if (critical == "SUCCESS") {
+                                                opposingStartingHP -= 2 * characterDMG;
+                                                Console.WriteLine("");
+                                                Console.WriteLine("You dealt CRITICAL DMG!");
+                                                Console.WriteLine($"{2 * characterDMG} damage was dealt to {opposingCharacterName}!");
+                                                break;
+                                            } else if (critical == "MISSED") {
+                                                opposingStartingHP -= characterDMG;
+                                                Console.WriteLine("");
+                                                Console.WriteLine("You missed your CRITICAL hit!");
+                                                Console.WriteLine($"{characterDMG} damage was dealt to {opposingCharacterName}!");
+                                                break;
+                                            }
                                         }
                                         else if (characterMove == "D") {
                                             if (characterDodgesLeft > 0) {
@@ -168,6 +204,7 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                         }
                                     }
+                                    Thread.Sleep(1500);
                                     Console.WriteLine("");
                                     Console.WriteLine("---------OPPONENT'S TURN---------");
                                     if (characterDodgedMove != true) {
@@ -180,19 +217,29 @@ namespace MushroomPocket.Functions {
                                     }
                                     Console.WriteLine("---------------------------------");
                                 }
+                                Thread.Sleep(1500);
                                 Console.WriteLine("");
                                 Console.WriteLine("*********RESULTS*********");
                                 Console.WriteLine("");
                                 Console.WriteLine($"Your {characterName}'s remaining HP: {characterHP}");
                                 Console.WriteLine($"Opposing {opposingCharacterName}'s remaining HP: {opposingStartingHP}");
                                 if (characterHP > opposingStartingHP) {
+                                    Thread.Sleep(1500);
                                     Console.WriteLine("");
                                     Console.WriteLine("Congratulations! You've won the battle!");
+                                    Thread.Sleep(1500);
                                     selectedPlayingCharacter.EXP += 10;  // gain 10 EXP if u win
 
                                     int catchChance = CatchRoulette();
                                     Console.WriteLine("");
                                     Console.WriteLine($"Catch chance: {catchChance}%");
+                                    Console.WriteLine("");
+
+                                    Thread.Sleep(2000);
+                                    Console.WriteLine("Wait for it...");
+                                    Thread.Sleep(2000);
+                                    Console.WriteLine("Come on...");
+                                    Thread.Sleep(2000);
                                     Console.WriteLine("");
 
                                     int roll = randomNumberGenerator.Next(1, 101);
@@ -204,6 +251,7 @@ namespace MushroomPocket.Functions {
                                             });
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Luigi") {
                                             context.Add(new Luigi() {
                                                 HP = 120,
@@ -211,6 +259,7 @@ namespace MushroomPocket.Functions {
                                             });
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Daisy") {
                                             context.Add(new Daisy() {
                                                 HP = 120,
@@ -218,6 +267,7 @@ namespace MushroomPocket.Functions {
                                             });
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Peach") {
                                             context.Add(new Peach() {
                                                 HP = 120,
@@ -225,6 +275,7 @@ namespace MushroomPocket.Functions {
                                             });
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Wario") {
                                             context.Add(new Wario() {
                                                 HP = 120,
@@ -232,6 +283,7 @@ namespace MushroomPocket.Functions {
                                             });
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Mario") {
                                             context.Add(new Mario() {
                                                 HP = 120,
@@ -239,6 +291,7 @@ namespace MushroomPocket.Functions {
                                             });
                                             Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"Boss {opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
                                         } else {
                                             Console.WriteLine($"An error occured while catching {opposingCharacterName}.");
                                         }
