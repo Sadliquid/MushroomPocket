@@ -9,17 +9,24 @@ namespace MushroomPocket.Functions {
         private static Random randomNumberGenerator = new Random();
 
         private static int CatchRoulette() {
-            int[] probabilities = { 20, 40, 60, 80, 100 };
+            int[] probabilities = { 10, 20, 40, 60, 80, 100, 80, 60, 40, 20, 10 };
             int index = 0;
 
             Console.WriteLine("");
             Console.WriteLine("Roulette is spinning... Press ENTER to stop!");
             while (!Console.KeyAvailable) {
                 index = (index + 1) % probabilities.Length;
-                Console.Write($"\r{probabilities[index]}%");
-                Thread.Sleep(50); // Adjust the speed of the roulette here
+                Console.Write($"\r");
+                for (int i = 0; i < probabilities.Length; i++) {
+                    if (i == index) {
+                        Console.Write($"[{probabilities[i]}] ");
+                    } else {
+                        Console.Write($"- ");
+                    }
+                }
+                Thread.Sleep(60);
             }
-            Console.ReadLine(); // Consume the ENTER key press
+            Console.ReadLine();
 
             return probabilities[index];
         }
@@ -183,52 +190,54 @@ namespace MushroomPocket.Functions {
                                     Console.WriteLine("Congratulations! You've won the battle!");
                                     selectedPlayingCharacter.EXP += 10;  // gain 10 EXP if u win
 
-                                    int catchProbability = CatchRoulette();
+                                    int catchChance = CatchRoulette();
+                                    Console.WriteLine("");
+                                    Console.WriteLine($"Catch chance: {catchChance}%");
                                     Console.WriteLine("");
 
                                     int roll = randomNumberGenerator.Next(1, 101);
-                                    if (roll <= catchProbability) {
+                                    if (roll <= catchChance) {
                                         if (opposingCharacterName == "Waluigi") {
                                             context.Add(new Waluigi() {
                                                 HP = 120,
                                                 EXP = 0
                                             });
-                                            Console.WriteLine($"Success! You caught {opposingCharacterName}!");
-                                            Console.WriteLine($"{opposingCharacterName} has been added into your pocket!");
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                         } else if (opposingCharacterName == "Luigi") {
                                             context.Add(new Luigi() {
                                                 HP = 120,
                                                 EXP = 0
                                             });
-                                            Console.WriteLine($"Success! You caught {opposingCharacterName}!");
-                                            Console.WriteLine($"{opposingCharacterName} has been added into your pocket!");
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                         } else if (opposingCharacterName == "Daisy") {
                                             context.Add(new Daisy() {
                                                 HP = 120,
                                                 EXP = 0
                                             });
-                                            Console.WriteLine($"Success! You caught {opposingCharacterName}!");
-                                            Console.WriteLine($"{opposingCharacterName} has been added into your pocket!");
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                         } else if (opposingCharacterName == "Peach") {
                                             context.Add(new Peach() {
                                                 HP = 120,
                                                 EXP = 0
                                             });
-                                            Console.WriteLine($"Success! You caught {opposingCharacterName}!");
-                                            Console.WriteLine($"{opposingCharacterName} has been added into your pocket!");
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                         } else if (opposingCharacterName == "Wario") {
                                             context.Add(new Wario() {
                                                 HP = 120,
                                                 EXP = 0
                                             });
-                                            Console.WriteLine($"Success! You caught {opposingCharacterName}!");
-                                            Console.WriteLine($"{opposingCharacterName} has been added into your pocket!");
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                         } else if (opposingCharacterName == "Mario") {
                                             context.Add(new Mario() {
                                                 HP = 120,
                                                 EXP = 0
                                             });
-                                            Console.WriteLine($"Gotcha! You caught {opposingCharacterName}!");
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
                                             Console.WriteLine($"Boss {opposingCharacterName} has been added to your pocket!");
                                         } else {
                                             Console.WriteLine($"An error occured while catching {opposingCharacterName}.");
@@ -237,13 +246,14 @@ namespace MushroomPocket.Functions {
                                         DatabaseManagementFunctions.RemoveTempFiles();
                                     } else {
                                         Console.WriteLine($"Oh no! {opposingCharacterName} ran away!");
+                                        Console.WriteLine("Better luck next time!");
                                         context.Dispose();
                                         DatabaseManagementFunctions.RemoveTempFiles();
                                     }
                                 }
                                 else if (opposingStartingHP > characterHP) {
                                     Console.WriteLine("");
-                                    Console.WriteLine("The opponent has won the battle. Better luck next time!");
+                                    Console.WriteLine("The opponent has won the battle. Good game!");
                                 }
                                 else {
                                     Console.WriteLine("");
