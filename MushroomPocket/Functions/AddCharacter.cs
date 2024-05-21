@@ -13,7 +13,7 @@ namespace MushroomPocket.Functions {
                 return;
             }
 
-            Console.Write("Enter Character's HP: ");
+            Console.Write("Enter Character's HP (Max: 100): ");
             int hp;
 
             if (!int.TryParse(Console.ReadLine(), out hp)) {
@@ -25,6 +25,12 @@ namespace MushroomPocket.Functions {
             if (hp <= 0) {
                 Console.WriteLine("");
                 Console.WriteLine("HP must be more than 0. Please try again."); // ensure valid HP
+                return;
+            }
+
+            if (hp > 100) {
+                Console.WriteLine("");
+                Console.WriteLine("Max HP allowed is 100. Please try again.");
                 return;
             }
 
