@@ -4,7 +4,6 @@ using MushroomPocket.Functions;
 
 namespace MushroomPocket {
     class Program {
-        static List<Character> characters = new List<Character>();
         static void Main(string[] args) {   
             List<MushroomMaster> mushroomMasters = new List<MushroomMaster>() {
                 new MushroomMaster("Daisy", 2, "Peach"),

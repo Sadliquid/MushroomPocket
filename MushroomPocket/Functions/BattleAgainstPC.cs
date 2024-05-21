@@ -1,8 +1,85 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace MushroomPocket.Functions {
     public static class BattleAgainstPCFunction {
+
+        private static Random randomNumberGenerator = new Random();
+
+        public static string CriticalRoulette() {
+            string[] possibilities = { "SUCCESS", "MISSED" };
+            int index = 0;
+
+            Console.WriteLine("");
+            Console.WriteLine("You have a chance to deal CRITICAL DMG! Press ENTER to stop!");
+            while (!Console.KeyAvailable) {
+                index = (index + 1) % possibilities.Length;
+                Console.Write($"\r");
+                for (int i = 0; i < possibilities.Length; i++) {
+                    if (i == index) {
+                        Console.Write($"[{possibilities[i]}] ");
+                    } else {
+                        Console.Write($"");
+                    }
+                }
+                Thread.Sleep(100);
+            }
+            Console.ReadLine();
+
+            return possibilities[index];
+        }
+
+        public static int CatchRoulette() {
+            int[] probabilities = { 10, 20, 40, 60, 80, 100, 80, 60, 40, 20, 10 };
+            int index = 0;
+
+            Console.WriteLine("");
+            Console.WriteLine("Roulette is spinning... Press ENTER to stop!");
+            while (!Console.KeyAvailable) {
+                index = (index + 1) % probabilities.Length;
+                Console.Write($"\r");
+                for (int i = 0; i < probabilities.Length; i++) {
+                    if (i == index) {
+                        Console.Write($"[{probabilities[i]}] ");
+                    } else {
+                        Console.Write($"- ");
+                    }
+                }
+                Thread.Sleep(60);
+            }
+            Console.ReadLine();
+
+            return probabilities[index];
+        }
+
+        public static List<Character> bosses = new List<Character> {
+            new Waluigi() {
+                HP = 120,
+                EXP = 0
+            },
+            new Luigi() {
+                HP = 120,
+                EXP = 0
+            },
+            new Daisy() {
+                HP = 120,
+                EXP = 0
+            },
+            new Peach() {
+                HP = 120,
+                EXP = 0
+            },
+            new Wario() {
+                HP = 120,
+                EXP = 0
+            },
+            new Mario() {
+                HP = 120,
+                EXP = 0
+            }
+        };
         public static void BattleAgainstPC() { // Additional comprehensive, creative and useful feature
             using (var context = new DatabaseContext()) {
                 context.Database.EnsureCreated();
@@ -16,16 +93,15 @@ namespace MushroomPocket.Functions {
                     return;
                 }
 
-                int characterStartingHP = 100;
-                int opposingStartingHP = 100;
+                int opposingStartingHP = 120;
                 Console.WriteLine("");
                 Console.WriteLine("--------------------------BATTLE MODE--------------------------");
-                Console.WriteLine("All characters' HP have been temporarily set to 100 for battle!");
+                Console.WriteLine("Boss battle stats have been boosted!");
                 Console.WriteLine("---------------------------------------------------------------");
                 Console.WriteLine("");
                 for (int i = 0; i < characters.Count; i++) {
                     Console.WriteLine($"({i + 1}). {characters[i].Name}");
-                    Console.WriteLine($"HP: {characterStartingHP}");
+                    Console.WriteLine($"HP: {characters[i].HP}");
                     Console.WriteLine($"EXP: {characters[i].EXP}");
                     Console.WriteLine($"Skill: {characters[i].Skill} ({characters[i].DMG} DMG)");
                     Console.WriteLine("");
@@ -42,18 +118,28 @@ namespace MushroomPocket.Functions {
                         string characterName = selectedPlayingCharacter.Name;
                         string characterSkill = selectedPlayingCharacter.Skill;
                         int characterDMG = selectedPlayingCharacter.DMG;
+                        int characterHP = selectedPlayingCharacter.HP;
 
                         bool characterDodgedMove = false;
                         int characterDodgesLeft = 2; // player only has 2 dodges
 
-                        Console.Write("Please choose your opponent: ");
+                        Console.WriteLine("---------------BOSSES---------------");
+                        for (int j = 0; j < bosses.Count; j++) {
+                            Console.WriteLine($"({j + 1}). {bosses[j].Name}");
+                            Console.WriteLine($"HP: {bosses[j].HP}");
+                            Console.WriteLine($"Skill: {bosses[j].Skill} ({bosses[j].DMG} DMG)");
+                            Console.WriteLine("");
+                        }
+                        Console.WriteLine("-------------------------------------");
+
+                        Console.Write("Please select your boss opponent: ");
                         string opposingCharacter = Console.ReadLine();
                         Console.WriteLine("-------------------------------------");
 
                         if (int.TryParse(opposingCharacter, out int convertedOpposingCharacter)) {
-                            if ((convertedOpposingCharacter <= characters.Count) && (convertedOpposingCharacter > 0)) {
+                            if ((convertedOpposingCharacter <= bosses.Count) && (convertedOpposingCharacter > 0)) {
 
-                                var selectedOpposingCharacter = characters[convertedOpposingCharacter - 1];
+                                var selectedOpposingCharacter = bosses[convertedOpposingCharacter - 1];
 
                                 string opposingCharacterName = selectedOpposingCharacter.Name;
                                 string opposingCharacterSkill = selectedOpposingCharacter.Skill;
@@ -63,29 +149,42 @@ namespace MushroomPocket.Functions {
                                 Console.WriteLine("");
                                 Console.WriteLine("-------------BATTLE START------------");
                                 for (int j = 0; j < 3; j++) {
+                                    Thread.Sleep(1000);
                                     Console.WriteLine("*************************************");
                                     Console.WriteLine($"Round ({j + 1}/3)");
                                     Console.WriteLine("*************************************");
+                                    Thread.Sleep(1500);
                                     Console.WriteLine("---------YOUR TURN---------");
                                     Console.WriteLine($"Your character: {characterName}");
-                                    Console.WriteLine($"Your HP: {characterStartingHP}");
+                                    Console.WriteLine($"Your HP: {characterHP}");
                                     Console.WriteLine($"Your skill: {characterSkill} ({characterDMG} DMG)");
                                     Console.WriteLine($"Dodges left: {characterDodgesLeft}");
                                     Console.WriteLine("");
-                                    Console.WriteLine($"Opposing character: {opposingCharacterName}");
-                                    Console.WriteLine($"Opposing HP: {opposingStartingHP}");
-                                    Console.WriteLine($"Opposing skill: {opposingCharacterSkill} ({opposingCharacterDMG} DMG)");
+                                    Console.WriteLine($"Boss: {opposingCharacterName}");
+                                    Console.WriteLine($"Boss HP: {opposingStartingHP}");
+                                    Console.WriteLine($"Boss skill: {opposingCharacterSkill} ({opposingCharacterDMG} DMG)");
                                     Console.WriteLine("---------------------------");
                                     Console.WriteLine("");
 
                                     while (true) {
+                                        Thread.Sleep(500);
                                         Console.Write($"Enter A to attack or D to dodge next opposing attack: ");
                                         string characterMove = Console.ReadLine().ToUpper();
                                         if (characterMove == "A") {
-                                            opposingStartingHP -=  characterDMG;
-                                            Console.WriteLine("");
-                                            Console.WriteLine($"You dealt {characterDMG} damage to {opposingCharacterName}!");
-                                            break;
+                                            string critical = CriticalRoulette();
+                                            if (critical == "SUCCESS") {
+                                                opposingStartingHP -= 2 * characterDMG;
+                                                Console.WriteLine("");
+                                                Console.WriteLine("You dealt CRITICAL DMG!");
+                                                Console.WriteLine($"{2 * characterDMG} damage was dealt to {opposingCharacterName}!");
+                                                break;
+                                            } else if (critical == "MISSED") {
+                                                opposingStartingHP -= characterDMG;
+                                                Console.WriteLine("");
+                                                Console.WriteLine("You missed your CRITICAL hit!");
+                                                Console.WriteLine($"{characterDMG} damage was dealt to {opposingCharacterName}!");
+                                                break;
+                                            }
                                         }
                                         else if (characterMove == "D") {
                                             if (characterDodgesLeft > 0) {
@@ -105,10 +204,11 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                         }
                                     }
+                                    Thread.Sleep(1500);
                                     Console.WriteLine("");
                                     Console.WriteLine("---------OPPONENT'S TURN---------");
                                     if (characterDodgedMove != true) {
-                                        characterStartingHP -= opposingCharacterDMG;
+                                        characterHP -= opposingCharacterDMG;
                                         Console.WriteLine($"Opposing {opposingCharacterName} dealt {opposingCharacterDMG} damage to you!");
                                     }
                                     else {
@@ -117,22 +217,96 @@ namespace MushroomPocket.Functions {
                                     }
                                     Console.WriteLine("---------------------------------");
                                 }
+                                Thread.Sleep(1500);
                                 Console.WriteLine("");
                                 Console.WriteLine("*********RESULTS*********");
                                 Console.WriteLine("");
-                                Console.WriteLine($"Your {characterName}'s remaining HP: {characterStartingHP}");
+                                Console.WriteLine($"Your {characterName}'s remaining HP: {characterHP}");
                                 Console.WriteLine($"Opposing {opposingCharacterName}'s remaining HP: {opposingStartingHP}");
-                                if (characterStartingHP > opposingStartingHP) {
+                                if (characterHP > opposingStartingHP) {
+                                    Thread.Sleep(1500);
                                     Console.WriteLine("");
                                     Console.WriteLine("Congratulations! You've won the battle!");
+                                    Thread.Sleep(1500);
                                     selectedPlayingCharacter.EXP += 10;  // gain 10 EXP if u win
 
-                                    DatabaseManagementFunctions.UpdateDB(context);
-                                    DatabaseManagementFunctions.RemoveTempFiles();
-                                }
-                                else if (opposingStartingHP > characterStartingHP) {
+                                    int catchChance = CatchRoulette();
                                     Console.WriteLine("");
-                                    Console.WriteLine("The opponent has won the battle. Better luck next time!");
+                                    Console.WriteLine($"Catch chance: {catchChance}%");
+                                    Console.WriteLine("");
+
+                                    Thread.Sleep(2000);
+                                    Console.WriteLine("Wait for it...");
+                                    Thread.Sleep(2000);
+                                    Console.WriteLine("Come on...");
+                                    Thread.Sleep(2000);
+                                    Console.WriteLine("");
+
+                                    int roll = randomNumberGenerator.Next(1, 101);
+                                    if (roll <= catchChance) {
+                                        if (opposingCharacterName == "Waluigi") {
+                                            context.Add(new Waluigi() {
+                                                HP = 120,
+                                                EXP = 0
+                                            });
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
+                                        } else if (opposingCharacterName == "Luigi") {
+                                            context.Add(new Luigi() {
+                                                HP = 120,
+                                                EXP = 0
+                                            });
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
+                                        } else if (opposingCharacterName == "Daisy") {
+                                            context.Add(new Daisy() {
+                                                HP = 120,
+                                                EXP = 0
+                                            });
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
+                                        } else if (opposingCharacterName == "Peach") {
+                                            context.Add(new Peach() {
+                                                HP = 120,
+                                                EXP = 0
+                                            });
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
+                                        } else if (opposingCharacterName == "Wario") {
+                                            context.Add(new Wario() {
+                                                HP = 120,
+                                                EXP = 0
+                                            });
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
+                                        } else if (opposingCharacterName == "Mario") {
+                                            context.Add(new Mario() {
+                                                HP = 120,
+                                                EXP = 0
+                                            });
+                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"Boss {opposingCharacterName} has been added to your pocket!");
+                                            Thread.Sleep(1500);
+                                        } else {
+                                            Console.WriteLine($"An error occured while catching {opposingCharacterName}.");
+                                        }
+                                        DatabaseManagementFunctions.UpdateDB(context);
+                                        DatabaseManagementFunctions.RemoveTempFiles();
+                                    } else {
+                                        Console.WriteLine($"Oh no! {opposingCharacterName} ran away!");
+                                        Console.WriteLine("Better luck next time!");
+                                        context.Dispose();
+                                        DatabaseManagementFunctions.RemoveTempFiles();
+                                    }
+                                }
+                                else if (opposingStartingHP > characterHP) {
+                                    Console.WriteLine("");
+                                    Console.WriteLine("The opponent has won the battle. Good game!");
                                 }
                                 else {
                                     Console.WriteLine("");
