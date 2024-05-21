@@ -15,7 +15,10 @@ namespace MushroomPocket.Functions {
             Console.WriteLine("");
             Console.WriteLine("You have a chance to deal CRITICAL DMG! Press ENTER to stop!");
             while (!Console.KeyAvailable) {
-                index = (index + 1) % possibilities.Length;
+                index += 1;
+                if (index == 2) {
+                    index = 0;
+                }
                 Console.Write($"\r");
                 for (int i = 0; i < possibilities.Length; i++) {
                     if (i == index) {
@@ -38,7 +41,10 @@ namespace MushroomPocket.Functions {
             Console.WriteLine("");
             Console.WriteLine("Roulette is spinning... Press ENTER to stop!");
             while (!Console.KeyAvailable) {
-                index = (index + 1) % probabilities.Length;
+                index += 1;
+                if (index == 11) {
+                    index = 0;
+                }
                 Console.Write($"\r");
                 for (int i = 0; i < probabilities.Length; i++) {
                     if (i == index) {
