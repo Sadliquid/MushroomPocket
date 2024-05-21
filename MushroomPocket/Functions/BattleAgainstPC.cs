@@ -102,7 +102,7 @@ namespace MushroomPocket.Functions {
                 int opposingStartingHP = 120;
                 Console.WriteLine("");
                 Console.WriteLine("--------------------------BATTLE MODE--------------------------");
-                Console.WriteLine("Boss battle stats have been boosted!");
+                Console.WriteLine("⬆⬆⬆ Boss battle stats have been boosted! ⬆⬆⬆");
                 Console.WriteLine("---------------------------------------------------------------");
                 Console.WriteLine("");
                 for (int i = 0; i < characters.Count; i++) {
@@ -153,7 +153,7 @@ namespace MushroomPocket.Functions {
                                 // PC have no dodges
 
                                 Console.WriteLine("");
-                                Console.WriteLine("-------------BATTLE START------------");
+                                Console.WriteLine("-----------🏁🏁BATTLE START🏁🏁------------");
                                 for (int j = 0; j < 3; j++) {
                                     Thread.Sleep(1000);
                                     Console.WriteLine("*************************************");
@@ -239,7 +239,7 @@ namespace MushroomPocket.Functions {
                                 if (characterHP > opposingStartingHP) {
                                     Thread.Sleep(1500);
                                     Console.WriteLine("");
-                                    Console.WriteLine("Congratulations! You've won the battle!");
+                                    Console.WriteLine("🎉🎉 Congratulations! You've won the battle! 🎉🎉");
                                     Thread.Sleep(1500);
                                     selectedPlayingCharacter.EXP += 10;  // gain 10 EXP if u win
 
@@ -263,7 +263,7 @@ namespace MushroomPocket.Functions {
                                                 EXP = 0
                                             });
                                             Console.WriteLine("");
-                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Luigi") {
@@ -272,7 +272,7 @@ namespace MushroomPocket.Functions {
                                                 EXP = 0
                                             });
                                             Console.WriteLine("");
-                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Daisy") {
@@ -281,7 +281,7 @@ namespace MushroomPocket.Functions {
                                                 EXP = 0
                                             });
                                             Console.WriteLine("");
-                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Peach") {
@@ -290,7 +290,7 @@ namespace MushroomPocket.Functions {
                                                 EXP = 0
                                             });
                                             Console.WriteLine("");
-                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Wario") {
@@ -299,7 +299,7 @@ namespace MushroomPocket.Functions {
                                                 EXP = 0
                                             });
                                             Console.WriteLine("");
-                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
                                         } else if (opposingCharacterName == "Mario") {
@@ -308,7 +308,7 @@ namespace MushroomPocket.Functions {
                                                 EXP = 0
                                             });
                                             Console.WriteLine("");
-                                            Console.WriteLine($"Gotcha! {opposingCharacterName} was caught!");
+                                            Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"Boss {opposingCharacterName} has been added to your pocket!");
                                             Thread.Sleep(1500);
                                         } else {
@@ -318,6 +318,7 @@ namespace MushroomPocket.Functions {
                                         DatabaseManagementFunctions.UpdateDB(context);
                                         DatabaseManagementFunctions.RemoveTempFiles();
                                     } else {
+                                        Console.WriteLine("");
                                         Console.WriteLine($"Oh no! {opposingCharacterName} ran away!");
                                         Console.WriteLine("Better luck next time!");
                                         context.Dispose();
