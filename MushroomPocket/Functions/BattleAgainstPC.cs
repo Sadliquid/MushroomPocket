@@ -181,7 +181,7 @@ namespace MushroomPocket.Functions {
                                             if (critical == "SUCCESS") {
                                                 opposingStartingHP -= 2 * characterDMG;
                                                 Console.WriteLine("");
-                                                Console.WriteLine("You dealt CRITICAL DMG!");
+                                                Console.WriteLine("You dealt CRITICAL (x2) DMG!");
                                                 Console.WriteLine($"{2 * characterDMG} damage was dealt to {opposingCharacterName}!");
                                                 break;
                                             } else if (critical == "MISSED") {
