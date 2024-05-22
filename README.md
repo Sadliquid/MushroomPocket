@@ -19,12 +19,16 @@ This console application let Super Mario’s players keep, view the characters t
 ## Notes
 - You can only add the 3 base characters (Daisy, Wario, and Waluigi) to your pocket, which can be transformed if you meet the requirements
 - You need 2 Daisy's to transform into Peach, 3 Warios to transform into Mario and only 1 Waluigi to transform into Luigi
-- All characters' health will be temporarily set to 100 for battle. This won't affect the original health of your characters.
+- Your characters' health will be temporarily set to 100 for battle. This won't affect the original health of your characters.
+- All bosses have 120HP and +5 DMG
 - You can use transformations in Battle Mode
 - You only have 2 dodges against the opposing character's attack
-- The character that remains with the most HP after all 3 battle rounds wins the battle!
-- If your character and the opposing character has the same HP after all 3 battle rounds, the battle will be a draw
-- Every battle win gains your playing character +10 EXP (EXP will still be reset to 0 after transforming)
+- The character that remains with the most HP after all 3 battle rounds OR the last one standing wins the battle!
+- If your character and the opposing character have the same HP after all 3 battle rounds, the battle will be a draw
+- Every battle win gains your playing character +10 EXP AND gives you a chance to catch the boss character!
+- Boss characters that you catch will get to keep the boosted 120HP!
+
+(P.S: EXP will be reset to 0 after transforming characters!)
 
 ## Character moves
 Daisy (Leadership): 20 DMG
