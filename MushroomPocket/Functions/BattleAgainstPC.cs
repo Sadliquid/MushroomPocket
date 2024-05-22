@@ -210,11 +210,20 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                         }
                                     }
+                                    if (opposingStartingHP <= 0) {
+                                        opposingStartingHP = 0;
+                                        Thread.Sleep(500);
+                                        Console.WriteLine("");
+                                        Console.WriteLine("----------------------------");
+                                        Console.WriteLine("You knocked out the boss!!");
+                                        Console.WriteLine("----------------------------");
+                                        break;
+                                    }
                                     Thread.Sleep(1500);
                                     Console.WriteLine("");
                                     Console.WriteLine("---------OPPONENT'S TURN---------");
-                                    string[] ellipses = { "..", "...", "...." };
-                                    for (int wait = 0; wait < 3; wait++) {
+                                    string[] ellipses = { "..", "..." };
+                                    for (int wait = 0; wait < 2; wait++) {
                                         Thread.Sleep(1500);
                                         Console.Write($"\rOpponent is making a turn" + ellipses[wait]);
                                     }
