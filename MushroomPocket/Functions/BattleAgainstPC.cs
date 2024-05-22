@@ -149,7 +149,7 @@ namespace MushroomPocket.Functions {
 
                                 string opposingCharacterName = selectedOpposingCharacter.Name;
                                 string opposingCharacterSkill = selectedOpposingCharacter.Skill;
-                                int opposingCharacterDMG = selectedOpposingCharacter.DMG;
+                                int opposingCharacterDMG = selectedOpposingCharacter.DMG + 5;
                                 // PC have no dodges
 
                                 Console.WriteLine("");
