@@ -9,14 +9,14 @@ namespace MushroomPocket.Functions {
         private static Random randomNumberGenerator = new Random();
 
         public static string CriticalRoulette() {
-            string[] possibilities = { "SUCCESS", "MISSED" };
+            string[] possibilities = { "SUCCESS", "MISSED", "SUCCESS", "MISSED", "SUCCESS", "MISSED" };
             int index = 0;
 
             Console.WriteLine("");
             Console.WriteLine("You have a chance to deal CRITICAL DMG! Press ENTER to stop!");
             while (!Console.KeyAvailable) {
                 index += 1;
-                if (index == 2) {
+                if (index == 6) {
                     index = 0;
                 }
                 Console.Write($"\r");
@@ -24,7 +24,7 @@ namespace MushroomPocket.Functions {
                     if (i == index) {
                         Console.Write($"[{possibilities[i]}] ");
                     } else {
-                        Console.Write($"");
+                        Console.Write($"- ");
                     }
                 }
                 Thread.Sleep(100);
