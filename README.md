@@ -14,7 +14,7 @@ This console application let Super Mario’s players keep, view the characters t
 
 (5). Remove a character from your pocket
 
-(6). Battle against the PC!
+(6). Battle against the PC! (This game mode is BEST played with sound turned on!)
 
 ## Notes
 - You can only add the 3 base characters (Daisy, Wario, and Waluigi) to your pocket, which can be transformed if you meet the requirements
@@ -69,6 +69,8 @@ The following are where I sourced for info and got help from throughout this who
 - [Lists in C# (GeeksForGeeks)](https://www.geeksforgeeks.org/c-sharp-list-class/)
 - [Exceptions in C# (W3 Schools)](https://www.w3schools.com/cs/cs_exceptions.php)
 - [DbSet (Microsoft)](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://learn.microsoft.com/en-us/dotnet/api/system.data.entity.dbset-1%3Fview%3Dentity-framework-6.2.0%23:~:text%3DA%2520DbSet%2520represents%2520the%2520collection,a%2520DbContext%2520using%2520the%2520DbContext.&ved=2ahUKEwjnp4zyuoiGAxX-d2wGHWiZBbYQFnoECBMQAw&usg=AOvVaw0CYGl-mhiemJrwTPhoZZ8T)
+- [Pokemon Original Soundtracks (OSTs)](https://youtube.com/playlist?list=PLR51GqAZA6TL7YdDnLxL9nXInw2_yX7Dq&feature=shared)
+- [Animal Crossing Theme Song](https://www.youtube.com/watch?v=1nomS1pYeZ0)
 
 The following AI tools were used to aid me in the Entity Framework section of this assignment:
 
