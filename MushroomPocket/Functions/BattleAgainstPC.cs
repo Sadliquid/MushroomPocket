@@ -2,11 +2,13 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
+using NetCoreAudio;
 
 namespace MushroomPocket.Functions {
     public static class BattleAgainstPCFunction {
 
         private static Random randomNumberGenerator = new Random();
+        private static readonly Player audioPlayer = new Player();
 
         public static string CriticalRoulette() {
             string[] possibilities = { "SUCCESS", "MISSED", "SUCCESS", "MISSED", "SUCCESS", "MISSED" };
@@ -87,6 +89,7 @@ namespace MushroomPocket.Functions {
             }
         };
         public static void BattleAgainstPC() { // Additional comprehensive, creative and useful feature
+            string audioFilePath = @"audio.wav"; // audio
             using (var context = new DatabaseContext()) {
                 context.Database.EnsureCreated();
                 var characters = context.Characters.ToList();
@@ -271,6 +274,7 @@ namespace MushroomPocket.Functions {
                                                 HP = 120,
                                                 EXP = 0
                                             });
+                                            audioPlayer.Play(audioFilePath);
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
