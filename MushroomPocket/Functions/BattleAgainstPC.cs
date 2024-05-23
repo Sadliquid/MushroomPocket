@@ -136,7 +136,7 @@ namespace MushroomPocket.Functions {
                         for (int j = 0; j < bosses.Count; j++) {
                             Console.WriteLine($"({j + 1}). {bosses[j].Name}");
                             Console.WriteLine($"HP: {bosses[j].HP}");
-                            Console.WriteLine($"Skill: {bosses[j].Skill} ({bosses[j].DMG} DMG)");
+                            Console.WriteLine($"Skill: {bosses[j].Skill} ({bosses[j].DMG + 5} DMG)");
                             Console.WriteLine("");
                         }
                         Console.WriteLine("-------------------------------------");
@@ -241,6 +241,15 @@ namespace MushroomPocket.Functions {
                                         characterDodgedMove = false;
                                     }
                                     Console.WriteLine("---------------------------------");
+                                    if (characterHP <= 0) {
+                                        characterHP = 0;
+                                        Thread.Sleep(500);
+                                        Console.WriteLine("");
+                                        Console.WriteLine("----------------------------");
+                                        Console.WriteLine("Your character has fainted!");
+                                        Console.WriteLine("----------------------------");
+                                        break;
+                                    }
                                 }
                                 Thread.Sleep(1500);
                                 Console.WriteLine("");
