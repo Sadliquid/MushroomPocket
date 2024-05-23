@@ -50,6 +50,8 @@ Luigi (Precision and Accuracy): 21 DMG
 
 `dotnet add package Microsoft.EntityFrameworkCore.Design`
 
+`dotnet add package NetCoreAudio`
+
 
 ## Sources and credits
 The following are where I sourced for info and got help from throughout this whole project, as well as owe credit to:
