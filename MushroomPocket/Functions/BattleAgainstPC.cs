@@ -89,7 +89,11 @@ namespace MushroomPocket.Functions {
             }
         };
         public static void BattleAgainstPC() { // Additional comprehensive, creative and useful feature
-            string audioFilePath = @"audio.wav"; // audio
+            string mainTheme = @"Audio/mainTheme.wav"; 
+            string battleTheme = @"Audio/battle.wav";
+            string catchingTheme = @"Audio/catching.wav";
+            string fledSound = @"Audio/fled.wav";
+            string successfulCatch = @"Audio/successfulCatch.wav";
             using (var context = new DatabaseContext()) {
                 context.Database.EnsureCreated();
                 var characters = context.Characters.ToList();
@@ -102,7 +106,15 @@ namespace MushroomPocket.Functions {
                     return;
                 }
 
+                audioPlayer.Play(mainTheme);
+
                 int opposingStartingHP = 120;
+                Thread.Sleep(800);
+                Console.WriteLine("");
+                Console.WriteLine("--------------------------------------------------------");
+                Console.WriteLine("Turn on your volume to enjoy the full battle experience!");
+                Console.WriteLine("--------------------------------------------------------");
+                Thread.Sleep(5000);
                 Console.WriteLine("");
                 Console.WriteLine("--------------------------BATTLE MODE--------------------------");
                 Console.WriteLine("⬆⬆⬆ Boss battle stats have been boosted! ⬆⬆⬆");
@@ -155,8 +167,12 @@ namespace MushroomPocket.Functions {
                                 int opposingCharacterDMG = selectedOpposingCharacter.DMG + 5;
                                 // PC have no dodges
 
+                                audioPlayer.Stop();
+
                                 Console.WriteLine("");
                                 Console.WriteLine("-----------🏁🏁BATTLE START🏁🏁------------");
+                                Thread.Sleep(500);
+                                audioPlayer.Play(battleTheme);
                                 for (int j = 0; j < 3; j++) {
                                     Thread.Sleep(1000);
                                     Console.WriteLine("*************************************");
@@ -251,6 +267,8 @@ namespace MushroomPocket.Functions {
                                         break;
                                     }
                                 }
+                                audioPlayer.Stop();
+                                audioPlayer.Play(catchingTheme);
                                 Thread.Sleep(1500);
                                 Console.WriteLine("");
                                 Console.WriteLine("*********RESULTS*********");
@@ -278,12 +296,13 @@ namespace MushroomPocket.Functions {
 
                                     int roll = randomNumberGenerator.Next(1, 101);
                                     if (roll <= catchChance) {
+                                        audioPlayer.Stop();
+                                        audioPlayer.Play(successfulCatch);
                                         if (opposingCharacterName == "Waluigi") {
                                             context.Add(new Waluigi() {
                                                 HP = 120,
                                                 EXP = 0
                                             });
-                                            audioPlayer.Play(audioFilePath);
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
@@ -340,6 +359,8 @@ namespace MushroomPocket.Functions {
                                         DatabaseManagementFunctions.UpdateDB(context);
                                         DatabaseManagementFunctions.RemoveTempFiles();
                                     } else {
+                                        audioPlayer.Stop();
+                                        audioPlayer.Play(fledSound);
                                         Console.WriteLine("");
                                         Console.WriteLine($"Oh no! {opposingCharacterName} ran away!");
                                         Console.WriteLine("Better luck next time!");
