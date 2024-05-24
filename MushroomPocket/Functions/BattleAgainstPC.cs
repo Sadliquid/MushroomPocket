@@ -89,6 +89,7 @@ namespace MushroomPocket.Functions {
             }
         };
         public static void BattleAgainstPC() { // Additional comprehensive, creative and useful feature
+            audioPlayer.Stop();
             string mainTheme = @"Audio/mainTheme.wav"; 
             string battleTheme = @"Audio/battle.wav";
             string catchingTheme = @"Audio/catching.wav";
@@ -268,7 +269,6 @@ namespace MushroomPocket.Functions {
                                     }
                                 }
                                 audioPlayer.Stop();
-                                audioPlayer.Play(catchingTheme);
                                 Thread.Sleep(1500);
                                 Console.WriteLine("");
                                 Console.WriteLine("*********RESULTS*********");
@@ -276,6 +276,7 @@ namespace MushroomPocket.Functions {
                                 Console.WriteLine($"Your {characterName}'s remaining HP: {characterHP}");
                                 Console.WriteLine($"Opposing {opposingCharacterName}'s remaining HP: {opposingStartingHP}");
                                 if (characterHP > opposingStartingHP) {
+                                    audioPlayer.Play(catchingTheme);
                                     Thread.Sleep(1500);
                                     Console.WriteLine("");
                                     Console.WriteLine("🎉🎉 Congratulations! You've won the battle! 🎉🎉");
@@ -306,7 +307,7 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
-                                            Thread.Sleep(1500);
+                                            Thread.Sleep(4000);
                                         } else if (opposingCharacterName == "Luigi") {
                                             context.Add(new Luigi() {
                                                 HP = 120,
@@ -315,7 +316,7 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
-                                            Thread.Sleep(1500);
+                                            Thread.Sleep(4000);
                                         } else if (opposingCharacterName == "Daisy") {
                                             context.Add(new Daisy() {
                                                 HP = 120,
@@ -324,7 +325,7 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
-                                            Thread.Sleep(1500);
+                                            Thread.Sleep(4000);
                                         } else if (opposingCharacterName == "Peach") {
                                             context.Add(new Peach() {
                                                 HP = 120,
@@ -333,7 +334,7 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
-                                            Thread.Sleep(1500);
+                                            Thread.Sleep(4000);
                                         } else if (opposingCharacterName == "Wario") {
                                             context.Add(new Wario() {
                                                 HP = 120,
@@ -342,7 +343,7 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"{opposingCharacterName} has been added to your pocket!");
-                                            Thread.Sleep(1500);
+                                            Thread.Sleep(4000);
                                         } else if (opposingCharacterName == "Mario") {
                                             context.Add(new Mario() {
                                                 HP = 120,
@@ -351,7 +352,7 @@ namespace MushroomPocket.Functions {
                                             Console.WriteLine("");
                                             Console.WriteLine($"✅✅ Gotcha! {opposingCharacterName} was caught! ✅✅");
                                             Console.WriteLine($"Boss {opposingCharacterName} has been added to your pocket!");
-                                            Thread.Sleep(1500);
+                                            Thread.Sleep(4000);
                                         } else {
                                             Console.WriteLine("");
                                             Console.WriteLine($"An error occured while catching {opposingCharacterName}.");
@@ -366,6 +367,7 @@ namespace MushroomPocket.Functions {
                                         Console.WriteLine("Better luck next time!");
                                         context.Dispose();
                                         DatabaseManagementFunctions.RemoveTempFiles();
+                                        Thread.Sleep(4000);
                                     }
                                 }
                                 else if (opposingStartingHP > characterHP) {
